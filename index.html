@@ -95,6 +95,196 @@ body.round-one,body.duel{overflow:auto}.round-one .app,.duel .app{padding:max(8p
   }
 }
 
+
+/* ===== v7：Round 2/3/FINAL + 结果页手机自适应 ===== */
+@media(max-width:520px){
+
+  /* Round 2 / Round 3 / FINAL：缩窄并居中，不影响 Round 1 */
+  body.duel .app{
+    padding:
+      max(7px,env(safe-area-inset-top))
+      14px
+      calc(86px + env(safe-area-inset-bottom));
+  }
+
+  body.duel #game{
+    padding-bottom:
+      calc(72px + env(safe-area-inset-bottom));
+  }
+
+  body.duel .topbar{
+    margin-bottom:3px;
+  }
+
+  body.duel .round{
+    font-size:15px;
+  }
+
+  body.duel .counter{
+    font-size:10.5px;
+  }
+
+  body.duel .progress{
+    margin-bottom:5px;
+  }
+
+  body.duel .question{
+    margin:4px 0 7px;
+    font-size:17px;
+  }
+
+  body.duel .choices{
+    width:82%;
+    max-width:350px;
+    margin:0 auto;
+    gap:5px;
+  }
+
+  body.duel .card{
+    border-radius:17px;
+  }
+
+  body.duel .photo{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    object-position:center;
+  }
+
+  body.duel .meta{
+    padding:6px 10px 7px;
+  }
+
+  body.duel .cpname{
+    padding-right:36px;
+    font-size:14px;
+  }
+
+  body.duel .people{
+    margin-top:2px;
+    font-size:9.5px;
+  }
+
+  body.duel .num{
+    font-size:9px;
+  }
+
+  body.duel .select-badge{
+    top:6px;
+    right:6px;
+    padding:4px 7px;
+    font-size:9.5px;
+  }
+
+  body.duel .vs{
+    margin:0;
+    font-size:10.5px;
+    line-height:1;
+  }
+
+  /* 结果页：Top1上方，Top2/3下方；整体更紧凑 */
+  .results{
+    padding-top:18px;
+  }
+
+  .results .eyebrow{
+    font-size:10px;
+    letter-spacing:.20em;
+  }
+
+  .results h1{
+    margin:7px 0 3px;
+    font-size:28px;
+  }
+
+  .result-sub{
+    margin-bottom:13px;
+    font-size:12px;
+  }
+
+  .podium{
+    width:100%;
+    max-width:430px;
+    margin:14px auto 16px;
+    gap:9px;
+  }
+
+  .rankcard{
+    border-radius:20px;
+  }
+
+  .rankcard.top1{
+    width:88%;
+    justify-self:center;
+  }
+
+  .rankcard img,
+  .rankcard.top1 img,
+  .rankcard:not(.top1) img{
+    width:100%;
+    aspect-ratio:4/3;
+    object-fit:cover;
+    object-position:center;
+  }
+
+  .rankmeta{
+    padding:8px 10px 10px;
+  }
+
+  .rankcard.top1 .cpname{
+    font-size:18px;
+  }
+
+  .rankcard.top1 .people{
+    font-size:11px;
+  }
+
+  .rankcard:not(.top1) .cpname{
+    font-size:14px;
+    padding-right:0;
+  }
+
+  .rankcard:not(.top1) .people{
+    font-size:9.5px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+
+  .medal{
+    top:7px;
+    right:7px;
+    padding:5px 8px;
+    font-size:10px;
+  }
+
+  .result-actions{
+    width:100%;
+    max-width:430px;
+    margin:0 auto;
+  }
+
+  .result-actions .btn{
+    padding:12px 14px;
+    font-size:13px;
+  }
+}
+
+/* 小屏手机再收一点，但仍然不改第一轮 */
+@media(max-width:380px){
+  body.duel .choices{
+    width:78%;
+  }
+
+  .rankcard.top1{
+    width:84%;
+  }
+
+  .results h1{
+    font-size:26px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -249,7 +439,7 @@ const CPS=[
 {"id":"131","people":"张峻豪 × 黄朔","name":"顺朔","image":"images/131.jpeg"},
 {"id":"132","people":"张峻豪 × 余宇涵","name":"豪涵无际","image":"images/132.jpeg"}
 ];
-const KEY="cp-heart-ranking-4pick-final-v6";
+const KEY="cp-heart-ranking-4pick-final-v7";
 const $=id=>document.getElementById(id),byId=id=>CPS.find(c=>c.id===id);let S=null;
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function chunk(arr,n){const out=[];for(let i=0;i<arr.length;i+=n)out.push(arr.slice(i,i+n));return out}
