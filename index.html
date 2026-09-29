@@ -12,18 +12,22 @@
   --muted:#80758d;
   --purple:#a982df;
   --purple2:#c8afea;
-  --glass:rgba(255,255,255,.78);
+  --glass:rgba(255,255,255,.80);
   --line:rgba(117,83,153,.13);
-  --shadow:0 16px 42px rgba(79,56,105,.12);
+  --shadow:0 14px 38px rgba(79,56,105,.11);
 }
 
 *{box-sizing:border-box}
 
+html,body{
+  margin:0;
+  min-height:100%;
+}
+
 html{scroll-behavior:smooth}
 
 body{
-  margin:0;
-  min-height:100vh;
+  min-height:100dvh;
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
   "Hiragino Sans GB","Microsoft YaHei",sans-serif;
   color:var(--ink);
@@ -38,10 +42,11 @@ button{
   font:inherit;
   border:0;
   cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
 }
 
 button:disabled{
-  opacity:.4;
+  opacity:.38;
   cursor:not-allowed;
 }
 
@@ -49,12 +54,17 @@ img{
   -webkit-user-drag:none;
 }
 
-.hidden{display:none!important}
+.hidden{
+  display:none!important;
+}
 
 .app{
   width:min(760px,100%);
-  margin:auto;
-  padding:18px 16px 42px;
+  margin:0 auto;
+  padding:
+    max(16px,env(safe-area-inset-top))
+    16px
+    calc(32px + env(safe-area-inset-bottom));
 }
 
 .glass{
@@ -70,7 +80,7 @@ img{
   border-radius:18px;
   background:#fff;
   color:var(--ink);
-  box-shadow:0 8px 24px rgba(71,52,92,.10);
+  box-shadow:0 7px 22px rgba(71,52,92,.09);
   font-weight:800;
 }
 
@@ -80,17 +90,17 @@ img{
 }
 
 .btn.ghost{
-  background:rgba(255,255,255,.68);
+  background:rgba(255,255,255,.72);
   border:1px solid var(--line);
 }
 
-/* =====================
-   首页
-===================== */
+/* =========================
+   HOME
+========================= */
 
 .hero{
   text-align:center;
-  padding:36px 16px 18px;
+  padding:34px 14px 14px;
 }
 
 .eyebrow{
@@ -113,39 +123,38 @@ img{
   line-height:1.6;
 }
 
-/* 动态卡片堆 */
+/* 首页动态叠放 */
 
 .stack{
   position:relative;
-  width:min(520px,92%);
-  height:390px;
-  margin:18px auto 12px;
+  width:min(510px,90%);
+  aspect-ratio:1 / .82;
+  margin:16px auto 12px;
   perspective:1000px;
 }
 
 .stack-card{
   position:absolute;
-  width:66%;
-  height:340px;
-  left:17%;
-  top:12px;
-  border-radius:30px;
+  width:61%;
+  left:19.5%;
+  top:1%;
+  aspect-ratio:3 / 4;
+  border-radius:28px;
   overflow:hidden;
-  border:7px solid rgba(255,255,255,.95);
+  border:7px solid rgba(255,255,255,.96);
   background:#eee;
-  box-shadow:0 20px 45px rgba(60,42,82,.19);
+  box-shadow:0 18px 42px rgba(60,42,82,.18);
   transform-origin:center 85%;
   transition:
-    transform .7s cubic-bezier(.22,.75,.24,1),
-    opacity .55s ease,
-    z-index 0s;
+    transform .68s cubic-bezier(.22,.75,.24,1),
+    opacity .55s ease;
 }
 
 .stack-card img{
   width:100%;
   height:100%;
   object-fit:cover;
-  object-position:center 35%;
+  object-position:center;
   display:block;
 }
 
@@ -156,23 +165,23 @@ img{
 
 .stack-card.pos1{
   z-index:3;
-  transform:translate(-56px,24px) rotate(-7deg) scale(.92);
+  transform:translate(-54px,22px) rotate(-7deg) scale(.92);
 }
 
 .stack-card.pos2{
   z-index:2;
-  transform:translate(58px,28px) rotate(7deg) scale(.91);
+  transform:translate(55px,25px) rotate(7deg) scale(.91);
 }
 
 .stack-card.pos3{
   z-index:1;
-  transform:translate(0,38px) rotate(2deg) scale(.87);
-  opacity:.25;
+  transform:translate(0,34px) rotate(2deg) scale(.87);
+  opacity:.28;
 }
 
 .stack-card.fly{
   z-index:8!important;
-  transform:translate(165px,-55px) rotate(17deg) scale(.96)!important;
+  transform:translate(160px,-48px) rotate(17deg) scale(.96)!important;
   opacity:0;
 }
 
@@ -181,11 +190,11 @@ img{
   justify-content:center;
   gap:10px;
   flex-wrap:wrap;
-  margin-top:8px;
+  margin-top:5px;
 }
 
 .rule{
-  margin-top:26px;
+  margin-top:24px;
   padding:20px;
   border-radius:25px;
   color:var(--muted);
@@ -193,36 +202,40 @@ img{
   line-height:1.85;
 }
 
-/* =====================
-   游戏页
-===================== */
+/* =========================
+   GAME
+========================= */
+
+#game{
+  padding-bottom:94px;
+}
 
 .topbar{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:10px;
-  margin-bottom:11px;
+  margin-bottom:10px;
 }
 
 .round{
   font-size:17px;
   font-weight:950;
-  letter-spacing:.05em;
+  letter-spacing:.04em;
 }
 
 .counter{
   color:var(--muted);
   font-size:13px;
-  margin-top:4px;
+  margin-top:3px;
 }
 
 .progress{
-  height:8px;
+  height:7px;
   overflow:hidden;
   border-radius:999px;
-  background:rgba(185,154,232,.2);
-  margin-bottom:15px;
+  background:rgba(185,154,232,.20);
+  margin-bottom:13px;
 }
 
 .progress i{
@@ -238,12 +251,12 @@ img{
   text-align:center;
   font-size:21px;
   font-weight:950;
-  margin:12px 0 16px;
+  margin:11px 0 14px;
 }
 
 .choices{
   display:grid;
-  gap:13px;
+  gap:12px;
 }
 
 .card{
@@ -251,10 +264,10 @@ img{
   position:relative;
   padding:0;
   overflow:hidden;
-  border-radius:24px;
+  border-radius:23px;
   text-align:left;
   color:var(--ink);
-  transition:transform .15s ease,box-shadow .15s ease;
+  transition:transform .14s ease;
 }
 
 .card:active{
@@ -265,22 +278,22 @@ img{
   width:100%;
   display:block;
   object-fit:cover;
-  object-position:center 32%;
+  object-position:center 30%;
   background:#eee;
 }
 
 .meta{
-  padding:12px 15px 14px;
+  padding:11px 14px 13px;
 }
 
 .cpname{
-  font-size:20px;
-  line-height:1.2;
+  font-size:19px;
+  line-height:1.18;
   font-weight:950;
 }
 
 .people{
-  margin-top:4px;
+  margin-top:3px;
   font-size:13px;
   color:var(--muted);
 }
@@ -295,9 +308,9 @@ img{
 .select-badge{
   position:absolute;
   z-index:4;
-  top:12px;
-  right:12px;
-  padding:7px 11px;
+  top:10px;
+  right:10px;
+  padding:6px 10px;
   border-radius:999px;
   background:rgba(255,255,255,.94);
   color:#8d65cf;
@@ -311,14 +324,16 @@ img{
   text-align:center;
   font-weight:950;
   color:#a67bd8;
-  letter-spacing:.22em;
+  letter-spacing:.18em;
   margin:-2px 0;
 }
 
+/* 桌面工具栏 */
+
 .toolbar{
   display:grid;
-  grid-template-columns:1fr 1.25fr 1fr;
-  gap:7px;
+  grid-template-columns:1fr 1.3fr 1fr;
+  gap:8px;
   margin-top:14px;
 }
 
@@ -327,19 +342,19 @@ img{
   font-size:12px;
 }
 
-/* 普通二选一图片 */
+/* 二选一 */
 
 body.duel .photo{
   aspect-ratio:4/3;
 }
 
-/* =====================
-   结果页
-===================== */
+/* =========================
+   RESULT
+========================= */
 
 .results{
   text-align:center;
-  padding-top:30px;
+  padding-top:28px;
 }
 
 .results h1{
@@ -349,7 +364,7 @@ body.duel .photo{
 
 .result-sub{
   color:var(--muted);
-  margin:0 0 22px;
+  margin:0 0 21px;
   font-size:14px;
 }
 
@@ -357,13 +372,13 @@ body.duel .photo{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
-  margin:24px 0;
+  margin:23px 0;
 }
 
 .rankcard{
   position:relative;
   overflow:hidden;
-  border-radius:27px;
+  border-radius:26px;
   text-align:left;
 }
 
@@ -378,7 +393,6 @@ body.duel .photo{
   object-position:center 30%;
 }
 
-/* 原图3:4，结果页尽量保留竖图 */
 .rankcard.top1 img{
   aspect-ratio:4/3;
 }
@@ -388,14 +402,14 @@ body.duel .photo{
 }
 
 .rankmeta{
-  padding:13px 15px 16px;
+  padding:12px 14px 15px;
 }
 
 .medal{
   position:absolute;
   z-index:5;
-  right:12px;
-  top:12px;
+  right:11px;
+  top:11px;
   padding:7px 10px;
   border-radius:999px;
   background:rgba(255,255,255,.94);
@@ -409,9 +423,9 @@ body.duel .photo{
   gap:9px;
 }
 
-/* =====================
-   导出弹窗
-===================== */
+/* =========================
+   MODAL
+========================= */
 
 .modal{
   position:fixed;
@@ -452,20 +466,28 @@ body.duel .photo{
   font-size:12px;
 }
 
-#exportCanvas{display:none}
+#exportCanvas{
+  display:none;
+}
 
-/* =====================
-   手机
-===================== */
+/* =================================================
+   MOBILE
+================================================= */
 
 @media(max-width:520px){
 
   .app{
-    padding:13px 12px 32px;
+    width:100%;
+    padding:
+      max(10px,env(safe-area-inset-top))
+      14px
+      calc(24px + env(safe-area-inset-bottom));
   }
 
+  /* HOME */
+
   .hero{
-    padding:32px 10px 14px;
+    padding:28px 8px 12px;
   }
 
   .hero h1{
@@ -476,121 +498,313 @@ body.duel .photo{
     font-size:14px;
   }
 
-  /* 首页动态3:4卡组 */
-
   .stack{
-    height:370px;
-    width:94%;
-    margin-top:10px;
+    width:92%;
+    max-width:420px;
+    aspect-ratio:1 / .88;
+    margin:8px auto 7px;
   }
 
   .stack-card{
-    width:67%;
-    left:16.5%;
-    height:335px;
+    width:62%;
+    left:19%;
+    top:1%;
+    aspect-ratio:3/4;
+    height:auto;
     border-width:6px;
-    border-radius:27px;
+    border-radius:25px;
   }
 
   .stack-card.pos1{
-    transform:translate(-42px,22px) rotate(-7deg) scale(.91);
+    transform:translate(-38px,20px) rotate(-7deg) scale(.91);
   }
 
   .stack-card.pos2{
-    transform:translate(43px,24px) rotate(7deg) scale(.9);
+    transform:translate(39px,22px) rotate(7deg) scale(.90);
+  }
+
+  .stack-card.pos3{
+    transform:translate(0,30px) rotate(2deg) scale(.86);
   }
 
   .stack-card.fly{
-    transform:translate(135px,-45px) rotate(17deg) scale(.96)!important;
+    transform:translate(125px,-40px) rotate(17deg) scale(.96)!important;
   }
 
-  /* ROUND 01 三张紧凑显示 */
+  .home-actions .btn{
+    padding:13px 16px;
+  }
+
+  .rule{
+    padding:18px;
+    border-radius:23px;
+    font-size:13px;
+  }
+
+  /* ==========================================
+     第一轮：一屏三选一
+  ========================================== */
+
+  body.round-one{
+    overflow:hidden;
+  }
+
+  body.round-one .app{
+    height:100dvh;
+    min-height:100dvh;
+    padding:
+      max(7px,env(safe-area-inset-top))
+      14px
+      calc(74px + env(safe-area-inset-bottom));
+  }
+
+  body.round-one #game{
+    height:100%;
+    padding-bottom:0;
+    display:flex;
+    flex-direction:column;
+    overflow:hidden;
+  }
 
   body.round-one .topbar{
-    margin-bottom:6px;
+    flex:0 0 auto;
+    margin-bottom:5px;
+  }
+
+  body.round-one .round{
+    font-size:15px;
+  }
+
+  body.round-one .counter{
+    font-size:11px;
+    margin-top:1px;
+  }
+
+  body.round-one .topbar .btn{
+    padding:9px 13px;
+    border-radius:15px;
+    font-size:12px;
   }
 
   body.round-one .progress{
-    margin-bottom:9px;
+    flex:0 0 auto;
+    height:6px;
+    margin-bottom:5px;
   }
 
   body.round-one .question{
-    margin:7px 0 10px;
-    font-size:18px;
+    flex:0 0 auto;
+    margin:3px 0 7px;
+    font-size:17px;
+    line-height:1.2;
   }
 
   body.round-one .choices{
-    gap:8px;
+    flex:1 1 auto;
+    min-height:0;
+    display:grid;
+    grid-template-rows:repeat(3,minmax(0,1fr));
+    gap:7px;
   }
 
   body.round-one .card{
-    border-radius:19px;
+    min-height:0;
+    height:100%;
+    border-radius:18px;
+    display:grid;
+    grid-template-rows:minmax(0,1fr) auto;
   }
 
-  /*
-    原图是3:4。
-    第一轮不能直接显示完整3:4，否则三张过长。
-    用横向人物窗口 + 焦点向上。
-  */
   body.round-one .photo{
-    height:132px;
+    width:100%;
+    height:100%;
+    min-height:0;
     object-fit:cover;
-    object-position:center 29%;
+    object-position:center 30%;
   }
 
   body.round-one .meta{
-    min-height:48px;
-    padding:7px 11px 8px;
+    flex:0 0 auto;
+    min-height:43px;
+    padding:6px 11px 7px;
   }
 
   body.round-one .cpname{
-    font-size:16px;
-    padding-right:43px;
+    font-size:15px;
+    line-height:1.12;
+    padding-right:42px;
   }
 
   body.round-one .people{
     margin-top:2px;
-    font-size:11px;
+    font-size:10.5px;
+    line-height:1.15;
   }
 
   body.round-one .num{
-    font-size:10px;
+    font-size:9.5px;
   }
 
   body.round-one .select-badge{
+    top:7px;
+    right:7px;
+    padding:5px 8px;
+    font-size:10.5px;
+  }
+
+  /*
+    手机底部固定操作栏。
+    左右仍然保留14px，不贴边。
+  */
+
+  body.round-one .toolbar{
+    position:fixed;
+    z-index:30;
+    left:14px;
+    right:14px;
+    bottom:calc(8px + env(safe-area-inset-bottom));
+
+    display:grid;
+    grid-template-columns:.85fr 1.3fr 1fr;
+    gap:6px;
+
+    margin:0;
+    padding:6px;
+
+    border-radius:21px;
+
+    background:rgba(248,244,252,.86);
+
+    border:1px solid rgba(255,255,255,.82);
+
+    box-shadow:
+      0 10px 30px rgba(61,46,78,.15);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
+  }
+
+  body.round-one .toolbar .btn{
+    padding:9px 3px;
+    min-height:42px;
+    border-radius:15px;
+    font-size:10.5px;
+    box-shadow:none;
+    white-space:nowrap;
+  }
+
+  /* ==========================================
+     二选一页面
+  ========================================== */
+
+  body.duel .app{
+    padding-left:14px;
+    padding-right:14px;
+  }
+
+  body.duel #game{
+    padding-bottom:
+      calc(92px + env(safe-area-inset-bottom));
+  }
+
+  body.duel .topbar{
+    margin-bottom:6px;
+  }
+
+  body.duel .round{
+    font-size:16px;
+  }
+
+  body.duel .counter{
+    font-size:11px;
+  }
+
+  body.duel .progress{
+    margin-bottom:8px;
+  }
+
+  body.duel .question{
+    margin:6px 0 10px;
+    font-size:18px;
+  }
+
+  body.duel .choices{
+    gap:7px;
+  }
+
+  body.duel .card{
+    border-radius:20px;
+  }
+
+  /*
+    两张卡时可以展示更多原图。
+  */
+
+  body.duel .photo{
+    aspect-ratio:16/9;
+    object-fit:cover;
+    object-position:center 30%;
+  }
+
+  body.duel .meta{
+    padding:8px 12px 9px;
+  }
+
+  body.duel .cpname{
+    font-size:17px;
+  }
+
+  body.duel .people{
+    font-size:11px;
+  }
+
+  body.duel .vs{
+    font-size:12px;
+    line-height:1;
+  }
+
+  body.duel .select-badge{
     top:8px;
     right:8px;
     padding:5px 9px;
     font-size:11px;
   }
 
-  body.round-one .toolbar{
-    margin-top:9px;
-    gap:5px;
+  body.duel .toolbar{
+    position:fixed;
+    z-index:30;
+
+    left:14px;
+    right:14px;
+    bottom:calc(8px + env(safe-area-inset-bottom));
+
+    display:grid;
+    grid-template-columns:.85fr 1.3fr 1fr;
+    gap:6px;
+
+    margin:0;
+    padding:6px;
+
+    border-radius:21px;
+
+    background:rgba(248,244,252,.88);
+
+    border:1px solid rgba(255,255,255,.82);
+
+    box-shadow:
+      0 10px 30px rgba(61,46,78,.15);
+
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
   }
 
-  body.round-one .toolbar .btn{
+  body.duel .toolbar .btn{
     padding:9px 3px;
-    font-size:11px;
-  }
-
-  /* 第二、三轮和FINAL：两张图时加高 */
-
-  body.duel .photo{
-    aspect-ratio:4/3;
-    object-position:center 30%;
-  }
-
-  body.duel .meta{
-    padding:10px 13px 12px;
-  }
-
-  body.duel .cpname{
-    font-size:18px;
-  }
-
-  body.duel .question{
-    margin:9px 0 13px;
+    min-height:42px;
+    border-radius:15px;
+    font-size:10.5px;
+    box-shadow:none;
+    white-space:nowrap;
   }
 
   .podium{
@@ -605,6 +819,50 @@ body.duel .photo{
     font-size:11px;
   }
 }
+
+/*
+  高度特别小的手机进一步压缩第一轮，
+  避免Safari工具栏出现时遮挡。
+*/
+
+@media(max-width:520px) and (max-height:720px){
+
+  body.round-one .round{
+    font-size:14px;
+  }
+
+  body.round-one .counter{
+    font-size:10px;
+  }
+
+  body.round-one .question{
+    font-size:15px;
+    margin:2px 0 5px;
+  }
+
+  body.round-one .choices{
+    gap:5px;
+  }
+
+  body.round-one .meta{
+    min-height:38px;
+    padding:4px 10px 5px;
+  }
+
+  body.round-one .cpname{
+    font-size:14px;
+  }
+
+  body.round-one .people{
+    font-size:9.5px;
+  }
+
+  body.round-one .toolbar .btn{
+    min-height:38px;
+    padding:7px 2px;
+  }
+}
+
 </style>
 </head>
 
@@ -612,108 +870,215 @@ body.duel .photo{
 
 <main class="app">
 
-<!-- =====================
-     首页
-===================== -->
+<!-- HOME -->
 
 <section id="home">
 
   <div class="hero">
-    <div class="eyebrow">CP HEART RANKING · 132</div>
-    <h1>哪对 CP 更让你心动</h1>
-    <p>132 组 CP · 多轮心动对决 · 自动生成 TOP 3</p>
+
+    <div class="eyebrow">
+      CP HEART RANKING · 132
+    </div>
+
+    <h1>
+      哪对 CP 更让你心动
+    </h1>
+
+    <p>
+      132 组 CP · 多轮心动对决 · 自动生成 TOP 3
+    </p>
+
   </div>
 
-  <div class="stack" id="stack"></div>
+  <div
+    class="stack"
+    id="stack">
+  </div>
 
   <div class="home-actions">
-    <button class="btn primary" id="startBtn">开始心动测试 ♡</button>
-    <button class="btn ghost hidden" id="continueBtn">继续上次进度</button>
+
+    <button
+      class="btn primary"
+      id="startBtn">
+      开始心动测试 ♡
+    </button>
+
+    <button
+      class="btn ghost hidden"
+      id="continueBtn">
+      继续上次进度
+    </button>
+
   </div>
 
   <div class="rule glass">
+
     ROUND 01　三选一：132 → 44<br>
+
     ROUND 02　两两复选：44 → 22<br>
+
     ROUND 03　高位复核：22 → 11<br>
-    FINAL　11 组进行最终排位对决，系统自动计算 TOP 3。<br><br>
-    每一道都可以跳过，也可以撤回上一题。测试进度会自动保存在当前浏览器。
-    最后一场完成后会直接进入结果页，不需要再手动选择 TOP 1、TOP 2、TOP 3。
+
+    FINAL　11 组进行最终排位对决，系统自动计算 TOP 3。
+
+    <br><br>
+
+    每一道都可以撤回。前三轮可以跳过。
+    测试进度会自动保存在当前浏览器。
+
+    <br>
+
+    FINAL 完成以后会直接显示最终 TOP 3，
+    不需要再手动选择前三名。
+
   </div>
 
 </section>
 
-<!-- =====================
-     对决页
-===================== -->
+<!-- GAME -->
 
-<section id="game" class="hidden">
+<section
+  id="game"
+  class="hidden">
 
   <div class="topbar">
+
     <div>
-      <div class="round" id="roundLabel"></div>
-      <div class="counter" id="counter"></div>
+
+      <div
+        class="round"
+        id="roundLabel">
+      </div>
+
+      <div
+        class="counter"
+        id="counter">
+      </div>
+
     </div>
 
-    <button class="btn ghost" id="homeBtn">首页</button>
+    <button
+      class="btn ghost"
+      id="homeBtn">
+      首页
+    </button>
+
   </div>
 
   <div class="progress">
     <i id="bar"></i>
   </div>
 
-  <div class="question" id="question"></div>
+  <div
+    class="question"
+    id="question">
+  </div>
 
-  <div class="choices" id="choices"></div>
+  <div
+    class="choices"
+    id="choices">
+  </div>
 
   <div class="toolbar">
-    <button class="btn ghost" id="undoBtn">↺ 撤回</button>
-    <button class="btn ghost" id="skipBtn">⏭ 这组都跳过</button>
-    <button class="btn ghost" id="saveBtn">💾 保存进度</button>
+
+    <button
+      class="btn ghost"
+      id="undoBtn">
+      ↺ 撤回
+    </button>
+
+    <button
+      class="btn ghost"
+      id="skipBtn">
+      ⏭ 这组都跳过
+    </button>
+
+    <button
+      class="btn ghost"
+      id="saveBtn">
+      💾 保存进度
+    </button>
+
   </div>
 
 </section>
 
-<!-- =====================
-     结果
-===================== -->
+<!-- RESULT -->
 
-<section id="result" class="hidden results">
+<section
+  id="result"
+  class="hidden results">
 
-  <div class="eyebrow">YOUR FINAL RANKING</div>
+  <div class="eyebrow">
+    YOUR FINAL RANKING
+  </div>
 
-  <h1>你的心动 TOP 3</h1>
+  <h1>
+    你的心动 TOP 3
+  </h1>
 
   <p class="result-sub">
     根据整场测试自动生成
   </p>
 
-  <div class="podium" id="podium"></div>
+  <div
+    class="podium"
+    id="podium">
+  </div>
 
   <div class="result-actions">
-    <button class="btn primary" id="exportBtn">生成榜单图 ↗</button>
-    <button class="btn ghost" id="restartBtn">重新测试</button>
+
+    <button
+      class="btn primary"
+      id="exportBtn">
+      生成榜单图 ↗
+    </button>
+
+    <button
+      class="btn ghost"
+      id="restartBtn">
+      重新测试
+    </button>
+
   </div>
 
 </section>
 
 </main>
 
-<!-- 导出弹窗 -->
+<!-- EXPORT MODAL -->
 
-<div id="modal" class="modal hidden">
+<div
+  id="modal"
+  class="modal hidden">
 
   <div class="modalbox">
 
     <div class="modalhead">
+
       <div>
-        <b>你的 TOP 3 榜单图</b>
-        <div class="small">iPhone 可长按图片保存。</div>
+
+        <b>
+          你的 TOP 3 榜单图
+        </b>
+
+        <div class="small">
+          iPhone 可以长按图片保存。
+        </div>
+
       </div>
 
-      <button class="btn ghost" id="closeModal">×</button>
+      <button
+        class="btn ghost"
+        id="closeModal">
+        ×
+      </button>
+
     </div>
 
-    <img id="exportImg" alt="TOP3">
+    <img
+      id="exportImg"
+      alt="TOP3">
 
     <button
       class="btn primary"
@@ -726,12 +1091,16 @@ body.duel .photo{
 
 </div>
 
-<canvas id="exportCanvas" width="1080" height="1600"></canvas>
+<canvas
+  id="exportCanvas"
+  width="1080"
+  height="1600">
+</canvas>
 
 <script>
 
 /* ==================================================
-   132 CP
+   CP DATA
 ================================================== */
 
 const CPS=[
@@ -883,10 +1252,10 @@ const CPS=[
 ];
 
 /* ==================================================
-   基础
+   BASE
 ================================================== */
 
-const KEY="cp-heart-ranking-final-auto-v3";
+const KEY="cp-heart-ranking-mobile-final-v4";
 
 const $=id=>document.getElementById(id);
 
@@ -907,6 +1276,7 @@ function shuffle(arr){
   }
 
   return a;
+
 }
 
 function chunk(arr,n){
@@ -920,15 +1290,21 @@ function chunk(arr,n){
   }
 
   return out;
+
 }
 
 function save(){
 
   if(!S)return;
 
-  localStorage.setItem(KEY,JSON.stringify(S));
+  localStorage.setItem(
+    KEY,
+    JSON.stringify(S)
+  );
 
-  $("continueBtn").classList.remove("hidden");
+  $("continueBtn")
+    .classList
+    .remove("hidden");
 
 }
 
@@ -936,7 +1312,9 @@ function load(){
 
   try{
 
-    return JSON.parse(localStorage.getItem(KEY));
+    return JSON.parse(
+      localStorage.getItem(KEY)
+    );
 
   }catch(e){
 
@@ -948,15 +1326,22 @@ function load(){
 
 function show(id){
 
-  ["home","game","result"].forEach(x=>{
+  ["home","game","result"]
+    .forEach(x=>{
 
-    $(x).classList.toggle("hidden",x!==id);
+      $(x).classList.toggle(
+        "hidden",
+        x!==id
+      );
 
-  });
+    });
 
   if(id!=="game"){
 
-    document.body.classList.remove("round-one","duel");
+    document.body.classList.remove(
+      "round-one",
+      "duel"
+    );
 
   }
 
@@ -968,7 +1353,7 @@ function show(id){
 }
 
 /* ==================================================
-   首页动态卡组
+   HERO
 ================================================== */
 
 const HERO_IDS=[
@@ -983,7 +1368,9 @@ const HERO_IDS=[
 ];
 
 let heroOrder=[...HERO_IDS];
+
 let heroTimer=null;
+
 let heroBusy=false;
 
 function buildHero(){
@@ -992,21 +1379,24 @@ function buildHero(){
 
   stack.innerHTML="";
 
-  heroOrder.slice(0,4).forEach((id,i)=>{
+  heroOrder
+    .slice(0,4)
+    .forEach((id,i)=>{
 
-    const c=byId(id);
+      const c=byId(id);
 
-    const el=document.createElement("div");
+      const el=
+        document.createElement("div");
 
-    el.className=`stack-card pos${i}`;
+      el.className=
+        `stack-card pos${i}`;
 
-    el.dataset.id=id;
+      el.innerHTML=
+        `<img src="${c.image}" alt="">`;
 
-    el.innerHTML=`<img src="${c.image}" alt="">`;
+      stack.appendChild(el);
 
-    stack.appendChild(el);
-
-  });
+    });
 
 }
 
@@ -1014,11 +1404,17 @@ function rotateHero(){
 
   if(heroBusy)return;
 
-  const stack=$("stack");
+  if(
+    $("home")
+      .classList
+      .contains("hidden")
+  ){
+    return;
+  }
 
-  if(!stack || $("home").classList.contains("hidden"))return;
-
-  const first=stack.querySelector(".pos0");
+  const first=
+    $("stack")
+      .querySelector(".pos0");
 
   if(!first)return;
 
@@ -1028,7 +1424,9 @@ function rotateHero(){
 
   setTimeout(()=>{
 
-    heroOrder.push(heroOrder.shift());
+    heroOrder.push(
+      heroOrder.shift()
+    );
 
     buildHero();
 
@@ -1042,20 +1440,28 @@ function startHero(){
 
   clearInterval(heroTimer);
 
-  heroTimer=setInterval(rotateHero,2800);
+  heroTimer=
+    setInterval(
+      rotateHero,
+      2800
+    );
 
 }
 
 buildHero();
+
 startHero();
 
 /* ==================================================
-   游戏状态
+   STATE
 ================================================== */
 
 function fresh(){
 
-  const order=shuffle(CPS.map(c=>c.id));
+  const order=
+    shuffle(
+      CPS.map(c=>c.id)
+    );
 
   return{
 
@@ -1075,7 +1481,6 @@ function fresh(){
 
     completed:0,
 
-    /* FINAL 排序状态 */
     finalList:[],
 
     finalRemaining:[],
@@ -1098,9 +1503,16 @@ function fresh(){
 
 function start(newGame=true){
 
-  S=newGame ? fresh() : load();
+  S=
+    newGame
+      ? fresh()
+      : load();
 
-  if(!S)S=fresh();
+  if(!S){
+
+    S=fresh();
+
+  }
 
   save();
 
@@ -1109,7 +1521,7 @@ function start(newGame=true){
 }
 
 /* ==================================================
-   卡片
+   CARD
 ================================================== */
 
 function cardHTML(id){
@@ -1119,22 +1531,42 @@ function cardHTML(id){
   if(!c)return "";
 
   return `
-    <button class="card glass" data-id="${id}">
-      <img class="photo" src="${c.image}" alt="${c.name}">
-      <span class="select-badge">选择</span>
+    <button
+      class="card glass"
+      data-id="${id}">
+
+      <img
+        class="photo"
+        src="${c.image}"
+        alt="${c.name}">
+
+      <span class="select-badge">
+        选择
+      </span>
 
       <div class="meta">
-        <span class="num">#${id}</span>
-        <div class="cpname">${c.name}</div>
-        <div class="people">${c.people}</div>
+
+        <span class="num">
+          #${id}
+        </span>
+
+        <div class="cpname">
+          ${c.name}
+        </div>
+
+        <div class="people">
+          ${c.people}
+        </div>
+
       </div>
+
     </button>
   `;
 
 }
 
 /* ==================================================
-   ROUND 1-3
+   RENDER
 ================================================== */
 
 function render(){
@@ -1142,6 +1574,7 @@ function render(){
   if(S.phase==="result"){
 
     renderResult();
+
     return;
 
   }
@@ -1149,6 +1582,7 @@ function render(){
   if(S.phase==="final"){
 
     renderFinal();
+
     return;
 
   }
@@ -1156,6 +1590,10 @@ function render(){
   renderRound();
 
 }
+
+/* ==================================================
+   ROUND 1-3
+================================================== */
 
 function renderRound(){
 
@@ -1172,19 +1610,26 @@ function renderRound(){
   );
 
   const names={
+
     1:"ROUND 01 · 全员海选",
+
     2:"ROUND 02 · 心动复选",
+
     3:"ROUND 03 · 高位复核"
+
   };
 
-  $("roundLabel").textContent=names[S.round];
+  $("roundLabel").textContent=
+    names[S.round];
 
-  const group=S.groups[S.index];
+  const group=
+    S.groups[S.index];
 
   $("counter").textContent=
     `本轮 ${S.index+1} / ${S.groups.length} · 已完成 ${S.completed} 场`;
 
-  const totalRound=S.groups.length || 1;
+  const totalRound=
+    S.groups.length || 1;
 
   $("bar").style.width=
     `${(S.index/totalRound)*100}%`;
@@ -1194,7 +1639,9 @@ function renderRound(){
       ? "这一组，选谁？"
       : "哪一对更让你心动？";
 
-  $("skipBtn").classList.remove("hidden");
+  $("skipBtn")
+    .classList
+    .remove("hidden");
 
   if(!group){
 
@@ -1221,7 +1668,13 @@ function renderRound(){
     .querySelectorAll(".card")
     .forEach(btn=>{
 
-      btn.onclick=()=>answerRound(btn.dataset.id);
+      btn.onclick=()=>{
+
+        answerRound(
+          btn.dataset.id
+        );
+
+      };
 
     });
 
@@ -1229,6 +1682,10 @@ function renderRound(){
     !S.history.length;
 
 }
+
+/* ==================================================
+   HISTORY
+================================================== */
 
 function pushHistory(){
 
@@ -1243,20 +1700,30 @@ function pushHistory(){
 
 }
 
+/* ==================================================
+   ROUND ANSWER
+================================================== */
+
 function answerRound(id){
 
   pushHistory();
 
   S.answers.push({
+
     group:S.groups[S.index],
+
     pick:id
+
   });
 
   S.index++;
 
   S.completed++;
 
-  if(S.index>=S.groups.length){
+  if(
+    S.index>=
+    S.groups.length
+  ){
 
     finishRound();
 
@@ -1273,15 +1740,21 @@ function skipRound(){
   pushHistory();
 
   S.answers.push({
+
     group:S.groups[S.index],
+
     pick:null
+
   });
 
   S.index++;
 
   S.completed++;
 
-  if(S.index>=S.groups.length){
+  if(
+    S.index>=
+    S.groups.length
+  ){
 
     finishRound();
 
@@ -1293,29 +1766,36 @@ function skipRound(){
 
 }
 
-/*
-  每轮胜者优先。
-  如果某题跳过，为保证固定晋级人数，
-  会用该轮初始随机顺序补足名额。
-*/
+/* ==================================================
+   ADVANCE
+================================================== */
 
 function winners(target){
 
   const scores={};
 
-  S.pool.forEach((id,index)=>{
+  S.pool.forEach(
+    (id,index)=>{
 
-    scores[id]={
-      id,
-      win:0,
-      seed:index
-    };
+      scores[id]={
 
-  });
+        id,
+
+        win:0,
+
+        seed:index
+
+      };
+
+    }
+  );
 
   S.answers.forEach(a=>{
 
-    if(a.pick && scores[a.pick]){
+    if(
+      a.pick &&
+      scores[a.pick]
+    ){
 
       scores[a.pick].win++;
 
@@ -1323,10 +1803,12 @@ function winners(target){
 
   });
 
-  return Object.values(scores)
-    .sort((a,b)=>
-      b.win-a.win ||
-      a.seed-b.seed
+  return Object
+    .values(scores)
+    .sort(
+      (a,b)=>
+        b.win-a.win ||
+        a.seed-b.seed
     )
     .slice(0,target)
     .map(x=>x.id);
@@ -1337,12 +1819,19 @@ function finishRound(){
 
   if(S.round===1){
 
-    const next=winners(44);
+    const next=
+      winners(44);
 
     S.round=2;
-    S.pool=shuffle(next);
-    S.groups=chunk(S.pool,2);
+
+    S.pool=
+      shuffle(next);
+
+    S.groups=
+      chunk(S.pool,2);
+
     S.index=0;
+
     S.answers=[];
 
     return;
@@ -1351,12 +1840,19 @@ function finishRound(){
 
   if(S.round===2){
 
-    const next=winners(22);
+    const next=
+      winners(22);
 
     S.round=3;
-    S.pool=shuffle(next);
-    S.groups=chunk(S.pool,2);
+
+    S.pool=
+      shuffle(next);
+
+    S.groups=
+      chunk(S.pool,2);
+
     S.index=0;
+
     S.answers=[];
 
     return;
@@ -1365,7 +1861,8 @@ function finishRound(){
 
   if(S.round===3){
 
-    const finalists=winners(11);
+    const finalists=
+      winners(11);
 
     beginFinal(finalists);
 
@@ -1374,30 +1871,29 @@ function finishRound(){
 }
 
 /* ==================================================
-   FINAL
-   11强自动完整排位
-   使用二分插入排序。
-
-   第一名自动进入榜单。
-   之后每个候选人与当前榜单中间位置比较，
-   根据用户选择缩小插入范围。
-   全部完成后得到完整1-11名。
+   FINAL AUTO RANKING
 ================================================== */
 
 function beginFinal(ids){
 
-  const list=shuffle(ids);
+  const list=
+    shuffle(ids);
 
   S.phase="final";
 
-  S.finalList=[list[0]];
+  S.finalList=[
+    list[0]
+  ];
 
-  S.finalRemaining=list.slice(1);
+  S.finalRemaining=
+    list.slice(1);
 
   S.finalCandidate=null;
 
   S.finalLow=0;
+
   S.finalHigh=0;
+
   S.finalMid=0;
 
   S.finalComparisons=0;
@@ -1408,18 +1904,23 @@ function beginFinal(ids){
 
 function prepareNextCandidate(){
 
-  if(!S.finalRemaining.length){
+  if(
+    !S.finalRemaining.length
+  ){
 
     finishFinal();
+
     return;
 
   }
 
-  S.finalCandidate=S.finalRemaining.shift();
+  S.finalCandidate=
+    S.finalRemaining.shift();
 
   S.finalLow=0;
 
-  S.finalHigh=S.finalList.length;
+  S.finalHigh=
+    S.finalList.length;
 
   prepareFinalComparison();
 
@@ -1427,11 +1928,9 @@ function prepareNextCandidate(){
 
 function prepareFinalComparison(){
 
-  /*
-    low == high 时，插入位置已经确定
-  */
-
-  if(S.finalLow>=S.finalHigh){
+  if(
+    S.finalLow>=S.finalHigh
+  ){
 
     S.finalList.splice(
       S.finalLow,
@@ -1449,56 +1948,70 @@ function prepareFinalComparison(){
 
   S.finalMid=
     Math.floor(
-      (S.finalLow+S.finalHigh)/2
+      (
+        S.finalLow+
+        S.finalHigh
+      )/2
     );
 
 }
+
+/* ==================================================
+   FINAL RENDER
+================================================== */
 
 function renderFinal(){
 
   show("game");
 
-  document.body.classList.remove("round-one");
+  document.body
+    .classList
+    .remove("round-one");
 
-  document.body.classList.add("duel");
+  document.body
+    .classList
+    .add("duel");
 
   $("roundLabel").textContent=
     "FINAL · 最终排位";
 
-  const ranked=S.finalList.length;
+  const ranked=
+    S.finalList.length;
 
   const remaining=
-    S.finalRemaining.length +
-    (S.finalCandidate ? 1 : 0);
+    S.finalRemaining.length+
+    (
+      S.finalCandidate
+        ? 1
+        : 0
+    );
 
   $("counter").textContent=
     `已排入 ${ranked} / 11 · 待排 ${remaining}`;
 
-  /*
-    FINAL进度是近似视觉进度，
-    因为二分比较次数取决于选择。
-  */
-
   $("bar").style.width=
-    `${Math.min(100,(ranked/11)*100)}%`;
+    `${Math.min(
+      100,
+      ranked/11*100
+    )}%`;
 
   $("question").textContent=
     "最后排位，哪一对更让你心动？";
 
-  /*
-    FINAL 不允许“都跳过”，
-    因为必须得到明确排名。
-  */
-
-  $("skipBtn").classList.add("hidden");
+  $("skipBtn")
+    .classList
+    .add("hidden");
 
   if(!S.finalCandidate){
 
     prepareNextCandidate();
 
-    if(S.phase==="result"){
+    if(
+      S.phase==="result"
+    ){
 
       renderResult();
+
       return;
 
     }
@@ -1506,7 +2019,9 @@ function renderFinal(){
   }
 
   const opponent=
-    S.finalList[S.finalMid];
+    S.finalList[
+      S.finalMid
+    ];
 
   const pair=[
     S.finalCandidate,
@@ -1516,14 +2031,21 @@ function renderFinal(){
   $("choices").innerHTML=
     pair
       .map(cardHTML)
-      .join('<div class="vs">VS</div>');
+      .join(
+        '<div class="vs">VS</div>'
+      );
 
   $("choices")
     .querySelectorAll(".card")
     .forEach(btn=>{
 
-      btn.onclick=
-        ()=>answerFinal(btn.dataset.id);
+      btn.onclick=()=>{
+
+        answerFinal(
+          btn.dataset.id
+        );
+
+      };
 
     });
 
@@ -1536,22 +2058,13 @@ function answerFinal(id){
 
   pushHistory();
 
-  const candidate=S.finalCandidate;
+  const candidate=
+    S.finalCandidate;
 
   const opponent=
-    S.finalList[S.finalMid];
-
-  /*
-    排名数组：索引越小，排名越高。
-
-    如果候选获胜：
-    候选应该排在 opponent 前面，
-    所以搜索左半边。
-
-    如果榜内 opponent 获胜：
-    候选排在 opponent 后面，
-    搜索右半边。
-  */
+    S.finalList[
+      S.finalMid
+    ];
 
   if(id===candidate){
 
@@ -1589,12 +2102,16 @@ function finishFinal(){
 }
 
 /* ==================================================
-   撤回
+   UNDO
 ================================================== */
 
 function undo(){
 
-  if(!S.history.length)return;
+  if(
+    !S.history.length
+  ){
+    return;
+  }
 
   const previous=
     S.history.pop();
@@ -1602,9 +2119,11 @@ function undo(){
   const remainingHistory=
     S.history;
 
-  S=JSON.parse(previous);
+  S=
+    JSON.parse(previous);
 
-  S.history=remainingHistory;
+  S.history=
+    remainingHistory;
 
   save();
 
@@ -1618,70 +2137,91 @@ function undo(){
 
 function renderResult(){
 
-  document.body.classList.remove(
-    "round-one",
-    "duel"
-  );
+  document.body
+    .classList
+    .remove(
+      "round-one",
+      "duel"
+    );
 
   show("result");
 
   const medals=[
+
     "👑 TOP 1",
+
     "🥈 TOP 2",
+
     "🥉 TOP 3"
+
   ];
 
   $("podium").innerHTML=
     S.result
-      .map((id,index)=>{
+      .map(
+        (id,index)=>{
 
-        const c=byId(id);
+          const c=
+            byId(id);
 
-        return `
-          <div class="rankcard glass ${index===0?"top1":""}">
+          return `
+            <div
+              class="rankcard glass
+              ${index===0?"top1":""}">
 
-            <span class="medal">
-              ${medals[index]}
-            </span>
+              <span class="medal">
+                ${medals[index]}
+              </span>
 
-            <img src="${c.image}" alt="${c.name}">
+              <img
+                src="${c.image}"
+                alt="${c.name}">
 
-            <div class="rankmeta">
+              <div class="rankmeta">
 
-              <div class="cpname">
-                ${c.name}
-              </div>
+                <div class="cpname">
+                  ${c.name}
+                </div>
 
-              <div class="people">
-                ${c.people}
+                <div class="people">
+                  ${c.people}
+                </div>
+
               </div>
 
             </div>
+          `;
 
-          </div>
-        `;
-
-      })
+        }
+      )
       .join("");
 
 }
 
 /* ==================================================
-   导出 TOP3
+   EXPORT
 ================================================== */
 
 async function exportRanking(){
 
-  const cvs=$("exportCanvas");
+  const cvs=
+    $("exportCanvas");
 
-  const ctx=cvs.getContext("2d");
+  const ctx=
+    cvs.getContext("2d");
 
-  const W=cvs.width;
-  const H=cvs.height;
+  const W=
+    cvs.width;
+
+  const H=
+    cvs.height;
 
   const gradient=
     ctx.createLinearGradient(
-      0,0,W,H
+      0,
+      0,
+      W,
+      H
     );
 
   gradient.addColorStop(
@@ -1699,13 +2239,21 @@ async function exportRanking(){
     "#fff2e6"
   );
 
-  ctx.fillStyle=gradient;
+  ctx.fillStyle=
+    gradient;
 
-  ctx.fillRect(0,0,W,H);
+  ctx.fillRect(
+    0,
+    0,
+    W,
+    H
+  );
 
-  ctx.textAlign="center";
+  ctx.textAlign=
+    "center";
 
-  ctx.fillStyle="#8d75a9";
+  ctx.fillStyle=
+    "#8d75a9";
 
   ctx.font=
     '700 28px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
@@ -1716,7 +2264,8 @@ async function exportRanking(){
     72
   );
 
-  ctx.fillStyle="#342c40";
+  ctx.fillStyle=
+    "#342c40";
 
   ctx.font=
     '900 60px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
@@ -1727,7 +2276,8 @@ async function exportRanking(){
     145
   );
 
-  ctx.fillStyle="#7d7389";
+  ctx.fillStyle=
+    "#7d7389";
 
   ctx.font=
     '25px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
@@ -1766,16 +2316,24 @@ async function exportRanking(){
 
   ];
 
-  for(let i=0;i<3;i++){
+  for(
+    let i=0;
+    i<3;
+    i++
+  ){
 
     const c=
-      byId(S.result[i]);
+      byId(
+        S.result[i]
+      );
 
     const b=
       boxes[i];
 
     const img=
-      await loadImg(c.image);
+      await loadImg(
+        c.image
+      );
 
     drawRoundRect(
       ctx,
@@ -1797,14 +2355,16 @@ async function exportRanking(){
       30
     );
 
-    ctx.textAlign="left";
+    ctx.textAlign=
+      "left";
 
-    ctx.fillStyle="#342c40";
+    ctx.fillStyle=
+      "#342c40";
 
     ctx.font=
       i===0
-      ? '900 45px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
-      : '900 34px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+        ? '900 45px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
+        : '900 34px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
     ctx.fillText(
       c.name,
@@ -1812,12 +2372,13 @@ async function exportRanking(){
       b.y+b.imageH+55
     );
 
-    ctx.fillStyle="#7d7389";
+    ctx.fillStyle=
+      "#7d7389";
 
     ctx.font=
       i===0
-      ? '25px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
-      : '20px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+        ? '25px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
+        : '20px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
     ctx.fillText(
       c.people,
@@ -1825,9 +2386,11 @@ async function exportRanking(){
       b.y+b.imageH+96
     );
 
-    ctx.textAlign="right";
+    ctx.textAlign=
+      "right";
 
-    ctx.fillStyle="#a17ad5";
+    ctx.fillStyle=
+      "#a17ad5";
 
     ctx.font=
       '900 25px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
@@ -1840,9 +2403,11 @@ async function exportRanking(){
 
   }
 
-  ctx.textAlign="center";
+  ctx.textAlign=
+    "center";
 
-  ctx.fillStyle="#9b8ca6";
+  ctx.fillStyle=
+    "#9b8ca6";
 
   ctx.font=
     '22px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
@@ -1854,24 +2419,31 @@ async function exportRanking(){
   );
 
   const url=
-    cvs.toDataURL("image/png");
+    cvs.toDataURL(
+      "image/png"
+    );
 
-  $("exportImg").src=url;
+  $("exportImg").src=
+    url;
 
-  $("modal").classList.remove("hidden");
+  $("modal")
+    .classList
+    .remove("hidden");
 
-  $("downloadBtn").onclick=()=>{
+  $("downloadBtn").onclick=
+    ()=>{
 
-    const a=
-      document.createElement("a");
+      const a=
+        document.createElement("a");
 
-    a.href=url;
+      a.href=url;
 
-    a.download="我的CP-TOP3.png";
+      a.download=
+        "我的CP-TOP3.png";
 
-    a.click();
+      a.click();
 
-  };
+    };
 
 }
 
@@ -1880,12 +2452,14 @@ function loadImg(src){
   return new Promise(
     (resolve,reject)=>{
 
-      const img=new Image();
+      const img=
+        new Image();
 
       img.onload=
         ()=>resolve(img);
 
-      img.onerror=reject;
+      img.onerror=
+        reject;
 
       img.src=src;
 
@@ -1895,23 +2469,40 @@ function loadImg(src){
 }
 
 function drawRoundRect(
-  ctx,x,y,w,h,r,fill
+  ctx,
+  x,
+  y,
+  w,
+  h,
+  r,
+  fill
 ){
 
   ctx.beginPath();
 
   ctx.roundRect(
-    x,y,w,h,r
+    x,
+    y,
+    w,
+    h,
+    r
   );
 
-  ctx.fillStyle=fill;
+  ctx.fillStyle=
+    fill;
 
   ctx.fill();
 
 }
 
 function drawCover(
-  ctx,img,x,y,w,h,r
+  ctx,
+  img,
+  x,
+  y,
+  w,
+  h,
+  r
 ){
 
   const scale=
@@ -1920,16 +2511,14 @@ function drawCover(
       h/img.height
     );
 
-  const sw=w/scale;
-  const sh=h/scale;
+  const sw=
+    w/scale;
+
+  const sh=
+    h/scale;
 
   const sx=
     (img.width-sw)/2;
-
-  /*
-    稍微向上取景，
-    更适合3:4双人人像
-  */
 
   const sy=
     Math.max(
@@ -1968,21 +2557,23 @@ function drawCover(
 }
 
 /* ==================================================
-   按钮
+   BUTTONS
 ================================================== */
 
 $("startBtn").onclick=()=>{
 
-  const old=load();
+  const old=
+    load();
 
   if(
     old &&
     old.phase!=="result"
   ){
 
-    const ok=confirm(
-      "开始新的测试会覆盖之前保存的进度，确定重新开始吗？"
-    );
+    const ok=
+      confirm(
+        "开始新的测试会覆盖之前保存的进度，确定重新开始吗？"
+      );
 
     if(!ok)return;
 
@@ -1998,87 +2589,114 @@ $("continueBtn").onclick=
 $("undoBtn").onclick=
   undo;
 
-$("skipBtn").onclick=()=>{
+$("skipBtn").onclick=
+  ()=>{
 
-  if(S.phase==="round"){
+    if(
+      S.phase==="round"
+    ){
 
-    skipRound();
+      skipRound();
 
-  }
+    }
 
-};
+  };
 
-$("saveBtn").onclick=()=>{
+$("saveBtn").onclick=
+  ()=>{
 
-  save();
+    save();
 
-  const old=
-    $("saveBtn").textContent;
+    const old=
+      $("saveBtn")
+        .textContent;
 
-  $("saveBtn").textContent=
-    "✓ 已保存";
+    $("saveBtn")
+      .textContent=
+      "✓ 已保存";
 
-  setTimeout(()=>{
+    setTimeout(
+      ()=>{
 
-    $("saveBtn").textContent=old;
+        $("saveBtn")
+          .textContent=
+          old;
 
-  },900);
+      },
+      900
+    );
 
-};
+  };
 
-$("homeBtn").onclick=()=>{
+$("homeBtn").onclick=
+  ()=>{
 
-  save();
+    save();
 
-  document.body.classList.remove(
-    "round-one",
-    "duel"
-  );
+    document.body
+      .classList
+      .remove(
+        "round-one",
+        "duel"
+      );
 
-  show("home");
+    show("home");
 
-  startHero();
+    startHero();
 
-};
+  };
 
 $("exportBtn").onclick=
   exportRanking;
 
-$("closeModal").onclick=()=>{
+$("closeModal").onclick=
+  ()=>{
 
-  $("modal").classList.add("hidden");
+    $("modal")
+      .classList
+      .add("hidden");
 
-};
+  };
 
-$("modal").onclick=e=>{
+$("modal").onclick=
+  e=>{
 
-  if(e.target===$("modal")){
+    if(
+      e.target===
+      $("modal")
+    ){
 
-    $("modal").classList.add("hidden");
+      $("modal")
+        .classList
+        .add("hidden");
 
-  }
+    }
 
-};
+  };
 
-$("restartBtn").onclick=()=>{
+$("restartBtn").onclick=
+  ()=>{
 
-  const ok=confirm(
-    "确定清空本次结果并重新测试吗？"
-  );
+    const ok=
+      confirm(
+        "确定清空本次结果并重新测试吗？"
+      );
 
-  if(!ok)return;
+    if(!ok)return;
 
-  localStorage.removeItem(KEY);
+    localStorage.removeItem(
+      KEY
+    );
 
-  S=fresh();
+    S=fresh();
 
-  save();
+    save();
 
-  render();
+    render();
 
-};
+  };
 
-/* 页面加载时检查存档 */
+/* 检查存档 */
 
 if(load()){
 
