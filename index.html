@@ -3,48 +3,35 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#f7f1ff">
+<meta name="theme-color" content="#f8f1ff">
 <title>哪对 CP 更让你心动</title>
 
 <style>
 :root{
   --ink:#352c43;
-  --muted:#7d7389;
-  --lav:#b99ae8;
-  --lav2:#e7daf9;
-  --glass:rgba(255,255,255,.76);
-  --line:rgba(117,83,153,.14);
-  --shadow:0 18px 50px rgba(79,56,105,.12);
+  --muted:#80758d;
+  --purple:#a982df;
+  --purple2:#c8afea;
+  --glass:rgba(255,255,255,.78);
+  --line:rgba(117,83,153,.13);
+  --shadow:0 16px 42px rgba(79,56,105,.12);
 }
 
 *{box-sizing:border-box}
 
+html{scroll-behavior:smooth}
+
 body{
   margin:0;
   min-height:100vh;
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB",sans-serif;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",
+  "Hiragino Sans GB","Microsoft YaHei",sans-serif;
   color:var(--ink);
   background:
-    radial-gradient(circle at 10% 0%,#efe4ff 0,transparent 34%),
-    radial-gradient(circle at 90% 18%,#fff0dc 0,transparent 30%),
+    radial-gradient(circle at 8% 3%,#eee2ff 0,transparent 34%),
+    radial-gradient(circle at 93% 20%,#fff0d9 0,transparent 31%),
     linear-gradient(160deg,#fffaf2,#f5efff 58%,#fff8ed);
   background-attachment:fixed;
-}
-
-.app{
-  width:min(760px,100%);
-  margin:auto;
-  padding:20px 16px 44px;
-}
-
-.hidden{display:none!important}
-
-.glass{
-  background:var(--glass);
-  border:1px solid rgba(255,255,255,.88);
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(16px);
-  -webkit-backdrop-filter:blur(16px);
 }
 
 button{
@@ -54,8 +41,28 @@ button{
 }
 
 button:disabled{
-  opacity:.42;
+  opacity:.4;
   cursor:not-allowed;
+}
+
+img{
+  -webkit-user-drag:none;
+}
+
+.hidden{display:none!important}
+
+.app{
+  width:min(760px,100%);
+  margin:auto;
+  padding:18px 16px 42px;
+}
+
+.glass{
+  background:var(--glass);
+  border:1px solid rgba(255,255,255,.9);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
 }
 
 .btn{
@@ -64,161 +71,190 @@ button:disabled{
   background:#fff;
   color:var(--ink);
   box-shadow:0 8px 24px rgba(71,52,92,.10);
-  font-weight:700;
+  font-weight:800;
 }
 
 .btn.primary{
-  background:linear-gradient(135deg,#a987df,#c8afea);
   color:#fff;
+  background:linear-gradient(135deg,#a783df,#c5a7eb);
 }
 
 .btn.ghost{
-  background:rgba(255,255,255,.62);
+  background:rgba(255,255,255,.68);
   border:1px solid var(--line);
 }
 
-/* 首页 */
+/* =====================
+   首页
+===================== */
 
 .hero{
   text-align:center;
-  padding:42px 20px 28px;
+  padding:36px 16px 18px;
 }
 
 .eyebrow{
   font-size:12px;
-  letter-spacing:.18em;
+  letter-spacing:.23em;
   color:#8d77aa;
-  font-weight:800;
+  font-weight:900;
 }
 
 .hero h1{
+  margin:12px 0 10px;
   font-size:34px;
   line-height:1.18;
-  margin:10px 0;
 }
 
 .hero p{
-  margin:0 auto;
+  margin:0;
   color:var(--muted);
-  max-width:520px;
-  line-height:1.7;
+  font-size:15px;
+  line-height:1.6;
 }
 
+/* 动态卡片堆 */
+
 .stack{
-  height:270px;
   position:relative;
-  margin:34px auto 30px;
-  max-width:560px;
+  width:min(520px,92%);
+  height:390px;
+  margin:18px auto 12px;
+  perspective:1000px;
 }
 
 .stack-card{
   position:absolute;
-  width:72%;
-  height:220px;
-  left:14%;
-  border-radius:26px;
+  width:66%;
+  height:340px;
+  left:17%;
+  top:12px;
+  border-radius:30px;
   overflow:hidden;
-  border:7px solid rgba(255,255,255,.9);
-  box-shadow:0 22px 45px rgba(55,38,77,.2);
-  background:#ddd;
+  border:7px solid rgba(255,255,255,.95);
+  background:#eee;
+  box-shadow:0 20px 45px rgba(60,42,82,.19);
+  transform-origin:center 85%;
+  transition:
+    transform .7s cubic-bezier(.22,.75,.24,1),
+    opacity .55s ease,
+    z-index 0s;
 }
 
 .stack-card img{
   width:100%;
   height:100%;
   object-fit:cover;
+  object-position:center 35%;
+  display:block;
 }
 
-.stack-card:nth-child(1){
-  transform:rotate(-8deg) translate(-18px,18px);
+.stack-card.pos0{
+  z-index:4;
+  transform:translate(0,0) rotate(-1deg) scale(1);
 }
 
-.stack-card:nth-child(2){
-  transform:rotate(7deg) translate(20px,15px);
+.stack-card.pos1{
+  z-index:3;
+  transform:translate(-56px,24px) rotate(-7deg) scale(.92);
 }
 
-.stack-card:nth-child(3){
-  transform:rotate(-1deg);
+.stack-card.pos2{
+  z-index:2;
+  transform:translate(58px,28px) rotate(7deg) scale(.91);
+}
+
+.stack-card.pos3{
+  z-index:1;
+  transform:translate(0,38px) rotate(2deg) scale(.87);
+  opacity:.25;
+}
+
+.stack-card.fly{
+  z-index:8!important;
+  transform:translate(165px,-55px) rotate(17deg) scale(.96)!important;
+  opacity:0;
 }
 
 .home-actions{
   display:flex;
-  gap:10px;
   justify-content:center;
+  gap:10px;
   flex-wrap:wrap;
+  margin-top:8px;
 }
 
 .rule{
   margin-top:26px;
-  padding:18px;
-  border-radius:22px;
+  padding:20px;
+  border-radius:25px;
   color:var(--muted);
   font-size:14px;
-  line-height:1.75;
+  line-height:1.85;
 }
 
-/* 顶部 */
+/* =====================
+   游戏页
+===================== */
 
 .topbar{
   display:flex;
-  align-items:center;
   justify-content:space-between;
-  gap:12px;
-  margin-bottom:12px;
+  align-items:center;
+  gap:10px;
+  margin-bottom:11px;
 }
 
 .round{
-  font-weight:900;
-  letter-spacing:.06em;
+  font-size:17px;
+  font-weight:950;
+  letter-spacing:.05em;
 }
 
 .counter{
-  font-size:13px;
   color:var(--muted);
+  font-size:13px;
   margin-top:4px;
 }
 
 .progress{
   height:8px;
-  background:rgba(185,154,232,.2);
-  border-radius:999px;
   overflow:hidden;
-  margin-bottom:18px;
+  border-radius:999px;
+  background:rgba(185,154,232,.2);
+  margin-bottom:15px;
 }
 
 .progress i{
   display:block;
-  height:100%;
   width:0;
-  background:linear-gradient(90deg,#b390e4,#d3bbed);
+  height:100%;
   border-radius:inherit;
-  transition:.25s;
+  background:linear-gradient(90deg,#ad88e1,#d2baef);
+  transition:width .3s ease;
 }
 
 .question{
   text-align:center;
   font-size:21px;
-  font-weight:900;
-  margin:12px 0 18px;
+  font-weight:950;
+  margin:12px 0 16px;
 }
-
-/* 卡片 */
 
 .choices{
   display:grid;
-  gap:14px;
+  gap:13px;
 }
 
 .card{
-  position:relative;
   width:100%;
+  position:relative;
   padding:0;
   overflow:hidden;
   border-radius:24px;
   text-align:left;
-  transition:.16s transform,.16s box-shadow;
-  border:1px solid rgba(255,255,255,.9);
   color:var(--ink);
+  transition:transform .15s ease,box-shadow .15s ease;
 }
 
 .card:active{
@@ -227,128 +263,108 @@ button:disabled{
 
 .photo{
   width:100%;
-  aspect-ratio:16/10;
   display:block;
   object-fit:cover;
+  object-position:center 32%;
   background:#eee;
 }
 
 .meta{
-  padding:14px 16px 16px;
+  padding:12px 15px 14px;
 }
 
 .cpname{
-  font-size:21px;
-  font-weight:900;
+  font-size:20px;
+  line-height:1.2;
+  font-weight:950;
 }
 
 .people{
+  margin-top:4px;
   font-size:13px;
   color:var(--muted);
-  margin-top:3px;
 }
 
 .num{
   float:right;
   font-size:11px;
-  color:#a69aad;
-  font-weight:700;
+  color:#a89dae;
+  font-weight:800;
 }
 
 .select-badge{
   position:absolute;
-  top:14px;
-  right:14px;
-  z-index:5;
-  background:rgba(255,255,255,.94);
-  color:#8c66cf;
-  padding:8px 12px;
+  z-index:4;
+  top:12px;
+  right:12px;
+  padding:7px 11px;
   border-radius:999px;
-  font-size:13px;
-  font-weight:900;
-  box-shadow:0 5px 16px rgba(50,35,70,.14);
+  background:rgba(255,255,255,.94);
+  color:#8d65cf;
+  font-size:12px;
+  font-weight:950;
+  box-shadow:0 5px 15px rgba(50,35,70,.13);
   pointer-events:none;
 }
 
 .vs{
   text-align:center;
-  font-weight:900;
-  color:#a783d8;
-  letter-spacing:.2em;
+  font-weight:950;
+  color:#a67bd8;
+  letter-spacing:.22em;
   margin:-2px 0;
 }
 
 .toolbar{
   display:grid;
-  grid-template-columns:1fr 1.2fr 1fr;
-  gap:8px;
-  margin-top:16px;
+  grid-template-columns:1fr 1.25fr 1fr;
+  gap:7px;
+  margin-top:14px;
 }
 
 .toolbar .btn{
-  padding:12px 8px;
-  font-size:13px;
+  padding:11px 6px;
+  font-size:12px;
 }
 
-/* FINAL */
+/* 普通二选一图片 */
 
-.final-grid{
+body.duel .photo{
+  aspect-ratio:4/3;
+}
+
+/* =====================
+   结果页
+===================== */
+
+.results{
+  text-align:center;
+  padding-top:30px;
+}
+
+.results h1{
+  margin:9px 0 4px;
+  font-size:34px;
+}
+
+.result-sub{
+  color:var(--muted);
+  margin:0 0 22px;
+  font-size:14px;
+}
+
+.podium{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
-}
-
-.final-card{
-  position:relative;
-}
-
-.final-card .pickbadge{
-  position:absolute;
-  top:12px;
-  right:12px;
-  z-index:6;
-  background:#fff;
-  padding:7px 10px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:900;
-  box-shadow:0 4px 14px #0002;
-}
-
-.final-card.selected{
-  outline:4px solid #b491e3;
-}
-
-.final-card.selected .pickbadge{
-  background:#b491e3;
-  color:#fff;
-}
-
-.final-help{
-  text-align:center;
-  color:var(--muted);
-  margin:0 0 16px;
-}
-
-/* 结果 */
-
-.results{text-align:center}
-
-.results h1{margin-bottom:4px}
-
-.podium{
-  margin:28px 0;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:14px;
-  align-items:start;
+  margin:24px 0;
 }
 
 .rankcard{
-  overflow:hidden;
-  border-radius:26px;
-  text-align:left;
   position:relative;
+  overflow:hidden;
+  border-radius:27px;
+  text-align:left;
 }
 
 .rankcard.top1{
@@ -357,54 +373,63 @@ button:disabled{
 
 .rankcard img{
   width:100%;
-  aspect-ratio:16/10;
-  object-fit:cover;
   display:block;
+  object-fit:cover;
+  object-position:center 30%;
 }
 
+/* 原图3:4，结果页尽量保留竖图 */
 .rankcard.top1 img{
-  aspect-ratio:16/9;
+  aspect-ratio:4/3;
+}
+
+.rankcard:not(.top1) img{
+  aspect-ratio:3/4;
 }
 
 .rankmeta{
-  padding:14px 16px 18px;
+  padding:13px 15px 16px;
 }
 
 .medal{
   position:absolute;
-  right:14px;
-  top:14px;
-  background:rgba(255,255,255,.92);
-  padding:8px 11px;
+  z-index:5;
+  right:12px;
+  top:12px;
+  padding:7px 10px;
   border-radius:999px;
-  font-weight:900;
-  box-shadow:0 5px 18px rgba(0,0,0,.12);
+  background:rgba(255,255,255,.94);
+  font-size:12px;
+  font-weight:950;
+  box-shadow:0 5px 16px rgba(0,0,0,.11);
 }
 
 .result-actions{
   display:grid;
-  gap:10px;
+  gap:9px;
 }
 
-/* 导出 */
+/* =====================
+   导出弹窗
+===================== */
 
 .modal{
   position:fixed;
   inset:0;
-  background:#302a3bb8;
-  z-index:20;
+  z-index:50;
   display:flex;
-  align-items:center;
   justify-content:center;
-  padding:18px;
+  align-items:center;
+  padding:16px;
+  background:rgba(43,36,53,.72);
 }
 
 .modalbox{
   width:min(620px,100%);
   max-height:92vh;
   overflow:auto;
-  border-radius:26px;
-  padding:18px;
+  padding:17px;
+  border-radius:25px;
   background:#fff;
 }
 
@@ -412,115 +437,120 @@ button:disabled{
   display:flex;
   justify-content:space-between;
   align-items:center;
+  gap:10px;
   margin-bottom:12px;
 }
 
 .modal img{
-  width:100%;
-  border-radius:18px;
   display:block;
+  width:100%;
+  border-radius:17px;
 }
 
 .small{
-  font-size:12px;
   color:var(--muted);
+  font-size:12px;
 }
 
 #exportCanvas{display:none}
 
-/* ==========================
-   手机适配
-   ========================== */
+/* =====================
+   手机
+===================== */
 
 @media(max-width:520px){
 
   .app{
-    padding:14px 12px 34px;
+    padding:13px 12px 32px;
   }
 
   .hero{
-    padding:34px 12px 22px;
+    padding:32px 10px 14px;
   }
 
   .hero h1{
-    font-size:30px;
+    font-size:29px;
   }
 
+  .hero p{
+    font-size:14px;
+  }
+
+  /* 首页动态3:4卡组 */
+
   .stack{
-    height:230px;
+    height:370px;
+    width:94%;
+    margin-top:10px;
   }
 
   .stack-card{
-    height:190px;
-    width:80%;
-    left:10%;
+    width:67%;
+    left:16.5%;
+    height:335px;
+    border-width:6px;
+    border-radius:27px;
   }
 
-  .cpname{
-    font-size:19px;
+  .stack-card.pos1{
+    transform:translate(-42px,22px) rotate(-7deg) scale(.91);
   }
 
-  .toolbar{
-    grid-template-columns:1fr 1fr 1fr;
+  .stack-card.pos2{
+    transform:translate(43px,24px) rotate(7deg) scale(.9);
   }
 
-  .toolbar .btn{
-    font-size:12px;
+  .stack-card.fly{
+    transform:translate(135px,-45px) rotate(17deg) scale(.96)!important;
   }
 
-  .podium{
-    gap:10px;
-  }
-
-  /* ROUND 01 专属紧凑模式 */
-
-  body.round-one .app{
-    padding-left:12px;
-    padding-right:12px;
-  }
+  /* ROUND 01 三张紧凑显示 */
 
   body.round-one .topbar{
-    margin-bottom:7px;
+    margin-bottom:6px;
   }
 
   body.round-one .progress{
-    margin-bottom:10px;
+    margin-bottom:9px;
   }
 
   body.round-one .question{
-    font-size:18px;
     margin:7px 0 10px;
+    font-size:18px;
   }
 
   body.round-one .choices{
-    gap:9px;
+    gap:8px;
   }
 
   body.round-one .card{
-    border-radius:18px;
+    border-radius:19px;
   }
 
+  /*
+    原图是3:4。
+    第一轮不能直接显示完整3:4，否则三张过长。
+    用横向人物窗口 + 焦点向上。
+  */
   body.round-one .photo{
     height:132px;
-    aspect-ratio:auto;
     object-fit:cover;
+    object-position:center 29%;
   }
 
   body.round-one .meta{
-    padding:8px 12px 9px;
-    min-height:50px;
+    min-height:48px;
+    padding:7px 11px 8px;
   }
 
   body.round-one .cpname{
     font-size:16px;
-    line-height:1.15;
-    padding-right:42px;
+    padding-right:43px;
   }
 
   body.round-one .people{
-    font-size:11px;
     margin-top:2px;
-    line-height:1.2;
+    font-size:11px;
   }
 
   body.round-one .num{
@@ -535,22 +565,46 @@ button:disabled{
   }
 
   body.round-one .toolbar{
-    margin-top:10px;
+    margin-top:9px;
     gap:5px;
   }
 
   body.round-one .toolbar .btn{
-    padding:9px 4px;
+    padding:9px 3px;
     font-size:11px;
   }
 
-  /* 第二、三轮继续使用较大的横图 */
+  /* 第二、三轮和FINAL：两张图时加高 */
 
-  body:not(.round-one) #game .photo{
-    aspect-ratio:16/10;
+  body.duel .photo{
+    aspect-ratio:4/3;
+    object-position:center 30%;
+  }
+
+  body.duel .meta{
+    padding:10px 13px 12px;
+  }
+
+  body.duel .cpname{
+    font-size:18px;
+  }
+
+  body.duel .question{
+    margin:9px 0 13px;
+  }
+
+  .podium{
+    gap:9px;
+  }
+
+  .rankcard:not(.top1) .cpname{
+    font-size:16px;
+  }
+
+  .rankcard:not(.top1) .people{
+    font-size:11px;
   }
 }
-
 </style>
 </head>
 
@@ -558,150 +612,127 @@ button:disabled{
 
 <main class="app">
 
+<!-- =====================
+     首页
+===================== -->
+
 <section id="home">
 
-<div class="hero">
-<div class="eyebrow">CP HEART RANKING · 132</div>
-<h1>哪对 CP 更让你心动</h1>
-<p>132 组 CP · 77 道对决 + 最终 TOP 3 决选</p>
-</div>
+  <div class="hero">
+    <div class="eyebrow">CP HEART RANKING · 132</div>
+    <h1>哪对 CP 更让你心动</h1>
+    <p>132 组 CP · 多轮心动对决 · 自动生成 TOP 3</p>
+  </div>
 
-<div class="stack">
-<div class="stack-card"><img src="images/039.jpeg" alt=""></div>
-<div class="stack-card"><img src="images/068.jpeg" alt=""></div>
-<div class="stack-card"><img src="images/125.jpeg" alt=""></div>
-</div>
+  <div class="stack" id="stack"></div>
 
-<div class="home-actions">
-<button class="btn primary" id="startBtn">开始心动测试 ♡</button>
-<button class="btn ghost hidden" id="continueBtn">继续上次进度</button>
-</div>
+  <div class="home-actions">
+    <button class="btn primary" id="startBtn">开始心动测试 ♡</button>
+    <button class="btn ghost hidden" id="continueBtn">继续上次进度</button>
+  </div>
 
-<div class="rule glass">
-ROUND 01 三选一：132 → 44<br>
-ROUND 02 两两复选：44 → 22<br>
-ROUND 03 高位复核：22 → 11<br>
-FINAL 从最终 11 组中依次选出 TOP 1、TOP 2、TOP 3。<br><br>
-每一道都可以跳过，也可以撤回上一题。测试进度会自动保存在当前浏览器。
-</div>
+  <div class="rule glass">
+    ROUND 01　三选一：132 → 44<br>
+    ROUND 02　两两复选：44 → 22<br>
+    ROUND 03　高位复核：22 → 11<br>
+    FINAL　11 组进行最终排位对决，系统自动计算 TOP 3。<br><br>
+    每一道都可以跳过，也可以撤回上一题。测试进度会自动保存在当前浏览器。
+    最后一场完成后会直接进入结果页，不需要再手动选择 TOP 1、TOP 2、TOP 3。
+  </div>
 
 </section>
+
+<!-- =====================
+     对决页
+===================== -->
 
 <section id="game" class="hidden">
 
-<div class="topbar">
+  <div class="topbar">
+    <div>
+      <div class="round" id="roundLabel"></div>
+      <div class="counter" id="counter"></div>
+    </div>
 
-<div>
-<div class="round" id="roundLabel"></div>
-<div class="counter" id="counter"></div>
-</div>
+    <button class="btn ghost" id="homeBtn">首页</button>
+  </div>
 
-<button class="btn ghost" id="homeBtn">首页</button>
+  <div class="progress">
+    <i id="bar"></i>
+  </div>
 
-</div>
+  <div class="question" id="question"></div>
 
-<div class="progress">
-<i id="bar"></i>
-</div>
+  <div class="choices" id="choices"></div>
 
-<div class="question" id="question"></div>
-
-<div class="choices" id="choices"></div>
-
-<div class="toolbar">
-<button class="btn ghost" id="undoBtn">↺ 撤回</button>
-<button class="btn ghost" id="skipBtn">⏭ 这组都跳过</button>
-<button class="btn ghost" id="saveBtn">💾 保存进度</button>
-</div>
+  <div class="toolbar">
+    <button class="btn ghost" id="undoBtn">↺ 撤回</button>
+    <button class="btn ghost" id="skipBtn">⏭ 这组都跳过</button>
+    <button class="btn ghost" id="saveBtn">💾 保存进度</button>
+  </div>
 
 </section>
 
-<section id="final" class="hidden">
-
-<div class="topbar">
-
-<div>
-<div class="round">FINAL · TOP 3 决选</div>
-<div class="counter" id="finalCount">已选择 0 / 3 · 最终决选</div>
-</div>
-
-<button class="btn ghost" id="finalUndo">↺ 撤回</button>
-
-</div>
-
-<div class="progress">
-<i style="width:100%"></i>
-</div>
-
-<div class="question">
-依次选出你的 TOP 1、TOP 2、TOP 3
-</div>
-
-<p class="final-help">
-第一次点击 = TOP 1 · 第二次 = TOP 2 · 第三次 = TOP 3
-</p>
-
-<div class="final-grid" id="finalGrid"></div>
-
-</section>
+<!-- =====================
+     结果
+===================== -->
 
 <section id="result" class="hidden results">
 
-<div class="eyebrow">YOUR FINAL RANKING</div>
+  <div class="eyebrow">YOUR FINAL RANKING</div>
 
-<h1>你的心动 TOP 3</h1>
+  <h1>你的心动 TOP 3</h1>
 
-<p class="small">132 组 CP 中留下的专属顺位</p>
+  <p class="result-sub">
+    根据整场测试自动生成
+  </p>
 
-<div class="podium" id="podium"></div>
+  <div class="podium" id="podium"></div>
 
-<div class="result-actions">
-<button class="btn primary" id="exportBtn">生成榜单图 ↗</button>
-<button class="btn ghost" id="restartBtn">重新测试</button>
-</div>
+  <div class="result-actions">
+    <button class="btn primary" id="exportBtn">生成榜单图 ↗</button>
+    <button class="btn ghost" id="restartBtn">重新测试</button>
+  </div>
 
 </section>
 
 </main>
 
+<!-- 导出弹窗 -->
+
 <div id="modal" class="modal hidden">
 
-<div class="modalbox">
+  <div class="modalbox">
 
-<div class="modalhead">
+    <div class="modalhead">
+      <div>
+        <b>你的 TOP 3 榜单图</b>
+        <div class="small">iPhone 可长按图片保存。</div>
+      </div>
 
-<div>
-<b>你的 TOP 3 榜单图</b>
-<div class="small">
-iPhone 可以长按图片保存，也可以点击下方下载按钮。
-</div>
-</div>
+      <button class="btn ghost" id="closeModal">×</button>
+    </div>
 
-<button class="btn ghost" id="closeModal">×</button>
+    <img id="exportImg" alt="TOP3">
 
-</div>
+    <button
+      class="btn primary"
+      style="width:100%;margin-top:12px"
+      id="downloadBtn">
+      下载图片 ↓
+    </button>
 
-<img id="exportImg" alt="TOP3 榜单">
-
-<button
-class="btn primary"
-style="width:100%;margin-top:12px"
-id="downloadBtn">
-下载图片 ↓
-</button>
+  </div>
 
 </div>
 
-</div>
-
-<canvas id="exportCanvas" width="1080" height="1500"></canvas>
+<canvas id="exportCanvas" width="1080" height="1600"></canvas>
 
 <script>
 
-/* =========================
-   132 组 CP
-   图片始终按编号读取
-   ========================= */
+/* ==================================================
+   132 CP
+================================================== */
 
 const CPS=[
 
@@ -851,959 +882,1209 @@ const CPS=[
 
 ];
 
-const KEY='cp-heart-ranking-mobile-v2';
+/* ==================================================
+   基础
+================================================== */
 
-let S=null;
+const KEY="cp-heart-ranking-final-auto-v3";
 
 const $=id=>document.getElementById(id);
 
-const byId=id=>CPS.find(x=>x.id===id);
+const byId=id=>CPS.find(c=>c.id===id);
 
-function shuffle(a){
+let S=null;
 
-a=[...a];
+function shuffle(arr){
 
-for(let i=a.length-1;i>0;i--){
+  const a=[...arr];
 
-const j=Math.floor(Math.random()*(i+1));
+  for(let i=a.length-1;i>0;i--){
 
-[a[i],a[j]]=[a[j],a[i]];
+    const j=Math.floor(Math.random()*(i+1));
 
+    [a[i],a[j]]=[a[j],a[i]];
+
+  }
+
+  return a;
 }
 
-return a;
+function chunk(arr,n){
 
-}
+  const out=[];
 
-function chunk(a,n){
+  for(let i=0;i<arr.length;i+=n){
 
-const r=[];
+    out.push(arr.slice(i,i+n));
 
-for(let i=0;i<a.length;i+=n){
+  }
 
-r.push(a.slice(i,i+n));
-
-}
-
-return r;
-
-}
-
-function fresh(){
-
-const order=shuffle(CPS.map(x=>x.id));
-
-return{
-round:1,
-index:0,
-pool:order,
-groups:chunk(order,3),
-answers:[],
-history:[],
-finalPicks:[],
-done:0
-};
-
+  return out;
 }
 
 function save(){
 
-localStorage.setItem(KEY,JSON.stringify(S));
+  if(!S)return;
 
-$('continueBtn').classList.remove('hidden');
+  localStorage.setItem(KEY,JSON.stringify(S));
+
+  $("continueBtn").classList.remove("hidden");
 
 }
 
 function load(){
 
-try{
+  try{
 
-return JSON.parse(localStorage.getItem(KEY));
+    return JSON.parse(localStorage.getItem(KEY));
 
-}catch(e){
+  }catch(e){
 
-return null;
+    return null;
 
-}
+  }
 
 }
 
 function show(id){
 
-['home','game','final','result'].forEach(x=>{
+  ["home","game","result"].forEach(x=>{
 
-$(x).classList.toggle('hidden',x!==id);
+    $(x).classList.toggle("hidden",x!==id);
 
-});
+  });
 
-window.scrollTo({
-top:0,
-behavior:'smooth'
-});
+  if(id!=="game"){
+
+    document.body.classList.remove("round-one","duel");
+
+  }
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+/* ==================================================
+   首页动态卡组
+================================================== */
+
+const HERO_IDS=[
+  "039",
+  "068",
+  "125",
+  "024",
+  "070",
+  "085",
+  "110",
+  "132"
+];
+
+let heroOrder=[...HERO_IDS];
+let heroTimer=null;
+let heroBusy=false;
+
+function buildHero(){
+
+  const stack=$("stack");
+
+  stack.innerHTML="";
+
+  heroOrder.slice(0,4).forEach((id,i)=>{
+
+    const c=byId(id);
+
+    const el=document.createElement("div");
+
+    el.className=`stack-card pos${i}`;
+
+    el.dataset.id=id;
+
+    el.innerHTML=`<img src="${c.image}" alt="">`;
+
+    stack.appendChild(el);
+
+  });
+
+}
+
+function rotateHero(){
+
+  if(heroBusy)return;
+
+  const stack=$("stack");
+
+  if(!stack || $("home").classList.contains("hidden"))return;
+
+  const first=stack.querySelector(".pos0");
+
+  if(!first)return;
+
+  heroBusy=true;
+
+  first.classList.add("fly");
+
+  setTimeout(()=>{
+
+    heroOrder.push(heroOrder.shift());
+
+    buildHero();
+
+    heroBusy=false;
+
+  },650);
+
+}
+
+function startHero(){
+
+  clearInterval(heroTimer);
+
+  heroTimer=setInterval(rotateHero,2800);
+
+}
+
+buildHero();
+startHero();
+
+/* ==================================================
+   游戏状态
+================================================== */
+
+function fresh(){
+
+  const order=shuffle(CPS.map(c=>c.id));
+
+  return{
+
+    phase:"round",
+
+    round:1,
+
+    index:0,
+
+    pool:order,
+
+    groups:chunk(order,3),
+
+    answers:[],
+
+    history:[],
+
+    completed:0,
+
+    /* FINAL 排序状态 */
+    finalList:[],
+
+    finalRemaining:[],
+
+    finalCandidate:null,
+
+    finalLow:0,
+
+    finalHigh:0,
+
+    finalMid:0,
+
+    finalComparisons:0,
+
+    result:[]
+
+  };
 
 }
 
 function start(newGame=true){
 
-S=newGame?fresh():load();
+  S=newGame ? fresh() : load();
 
-if(!S){
+  if(!S)S=fresh();
 
-S=fresh();
+  save();
 
-}
-
-save();
-
-render();
+  render();
 
 }
 
-/* 卡片 */
+/* ==================================================
+   卡片
+================================================== */
 
-function cardHTML(id,final=false){
+function cardHTML(id){
 
-const c=byId(id);
+  const c=byId(id);
 
-if(!c)return '';
+  if(!c)return "";
 
-return `
-<button
-class="card glass ${final?'final-card':''}"
-data-id="${id}">
+  return `
+    <button class="card glass" data-id="${id}">
+      <img class="photo" src="${c.image}" alt="${c.name}">
+      <span class="select-badge">选择</span>
 
-<img
-class="photo"
-src="${c.image}"
-alt="${c.name}">
-
-${!final?'<span class="select-badge">选择</span>':''}
-
-<div class="meta">
-
-<span class="num">#${id}</span>
-
-<div class="cpname">${c.name}</div>
-
-<div class="people">${c.people}</div>
-
-</div>
-
-${final?'<span class="pickbadge">选择</span>':''}
-
-</button>
-`;
+      <div class="meta">
+        <span class="num">#${id}</span>
+        <div class="cpname">${c.name}</div>
+        <div class="people">${c.people}</div>
+      </div>
+    </button>
+  `;
 
 }
 
-/* 主游戏 */
+/* ==================================================
+   ROUND 1-3
+================================================== */
 
 function render(){
 
-document.body.classList.toggle(
-'round-one',
-S.round===1
-);
+  if(S.phase==="result"){
 
-if(S.round===4){
+    renderResult();
+    return;
 
-renderFinal();
+  }
 
-return;
+  if(S.phase==="final"){
 
-}
+    renderFinal();
+    return;
 
-if(S.round===5){
+  }
 
-renderResult();
-
-return;
+  renderRound();
 
 }
 
-show('game');
+function renderRound(){
 
-const names={
-1:'ROUND 01 · 全员海选',
-2:'ROUND 02 · 心动复选',
-3:'ROUND 03 · 高位复核'
-};
+  show("game");
 
-$('roundLabel').textContent=
-names[S.round];
+  document.body.classList.toggle(
+    "round-one",
+    S.round===1
+  );
 
-const q=S.groups[S.index];
+  document.body.classList.toggle(
+    "duel",
+    S.round!==1
+  );
 
-$('counter').textContent=
-`已完成 ${S.done} / 77 道 · 本轮 ${S.index+1} / ${S.groups.length}`;
+  const names={
+    1:"ROUND 01 · 全员海选",
+    2:"ROUND 02 · 心动复选",
+    3:"ROUND 03 · 高位复核"
+  };
 
-$('bar').style.width=
-(S.done/77*100)+'%';
+  $("roundLabel").textContent=names[S.round];
 
-$('question').textContent=
-S.round===1
-?'这一组，选谁？'
-:'哪一对更让你心动？';
+  const group=S.groups[S.index];
 
-if(!q){
+  $("counter").textContent=
+    `本轮 ${S.index+1} / ${S.groups.length} · 已完成 ${S.completed} 场`;
 
-advance();
+  const totalRound=S.groups.length || 1;
 
-save();
+  $("bar").style.width=
+    `${(S.index/totalRound)*100}%`;
 
-render();
+  $("question").textContent=
+    S.round===1
+      ? "这一组，选谁？"
+      : "哪一对更让你心动？";
 
-return;
+  $("skipBtn").classList.remove("hidden");
 
-}
+  if(!group){
 
-$('choices').innerHTML=
-q.map(id=>cardHTML(id,false))
-.join(
-S.round===1
-?''
-:'<div class="vs">VS</div>'
-);
+    finishRound();
 
-$('choices')
-.querySelectorAll('.card')
-.forEach(b=>{
+    save();
 
-b.onclick=
-()=>answer(b.dataset.id);
+    render();
 
-});
+    return;
 
-$('undoBtn').disabled=
-!S.history.length;
+  }
 
-}
+  $("choices").innerHTML=
+    group
+      .map(cardHTML)
+      .join(
+        S.round===1
+          ? ""
+          : '<div class="vs">VS</div>'
+      );
 
-function answer(id){
+  $("choices")
+    .querySelectorAll(".card")
+    .forEach(btn=>{
 
-S.history.push(
-JSON.stringify({
-...S,
-history:[]
-})
-);
+      btn.onclick=()=>answerRound(btn.dataset.id);
 
-S.answers.push({
-group:S.groups[S.index],
-pick:id
-});
+    });
 
-S.index++;
-
-S.done++;
-
-advance();
-
-save();
-
-render();
+  $("undoBtn").disabled=
+    !S.history.length;
 
 }
 
-function skip(){
+function pushHistory(){
 
-S.history.push(
-JSON.stringify({
-...S,
-history:[]
-})
-);
+  const copy={
+    ...S,
+    history:[]
+  };
 
-S.answers.push({
-group:S.groups[S.index],
-pick:null
-});
-
-S.index++;
-
-S.done++;
-
-advance();
-
-save();
-
-render();
+  S.history.push(
+    JSON.stringify(copy)
+  );
 
 }
 
-function rankRound(target){
+function answerRound(id){
 
-const score={};
+  pushHistory();
 
-S.pool.forEach((id,i)=>{
+  S.answers.push({
+    group:S.groups[S.index],
+    pick:id
+  });
 
-score[id]={
-id,
-win:0,
-seed:i
-};
+  S.index++;
 
-});
+  S.completed++;
 
-S.answers.forEach(a=>{
+  if(S.index>=S.groups.length){
 
-if(
-a.pick &&
-score[a.pick]
-){
+    finishRound();
 
-score[a.pick].win++;
+  }
 
-}
+  save();
 
-});
-
-return Object.values(score)
-.sort(
-(a,b)=>
-b.win-a.win ||
-a.seed-b.seed
-)
-.slice(0,target)
-.map(x=>x.id);
+  render();
 
 }
 
-function advance(){
+function skipRound(){
 
-if(S.index<S.groups.length){
+  pushHistory();
 
-return;
+  S.answers.push({
+    group:S.groups[S.index],
+    pick:null
+  });
 
-}
+  S.index++;
 
-if(S.round===1){
+  S.completed++;
 
-const p=rankRound(44);
+  if(S.index>=S.groups.length){
 
-S.round=2;
+    finishRound();
 
-S.index=0;
+  }
 
-S.pool=shuffle(p);
+  save();
 
-S.groups=chunk(S.pool,2);
-
-S.answers=[];
-
-return;
-
-}
-
-if(S.round===2){
-
-const p=rankRound(22);
-
-S.round=3;
-
-S.index=0;
-
-S.pool=shuffle(p);
-
-S.groups=chunk(S.pool,2);
-
-S.answers=[];
-
-return;
+  render();
 
 }
 
-if(S.round===3){
+/*
+  每轮胜者优先。
+  如果某题跳过，为保证固定晋级人数，
+  会用该轮初始随机顺序补足名额。
+*/
 
-const p=rankRound(11);
+function winners(target){
 
-S.round=4;
+  const scores={};
 
-S.index=0;
+  S.pool.forEach((id,index)=>{
 
-S.pool=p;
+    scores[id]={
+      id,
+      win:0,
+      seed:index
+    };
 
-S.groups=[];
+  });
 
-S.answers=[];
+  S.answers.forEach(a=>{
+
+    if(a.pick && scores[a.pick]){
+
+      scores[a.pick].win++;
+
+    }
+
+  });
+
+  return Object.values(scores)
+    .sort((a,b)=>
+      b.win-a.win ||
+      a.seed-b.seed
+    )
+    .slice(0,target)
+    .map(x=>x.id);
 
 }
 
+function finishRound(){
+
+  if(S.round===1){
+
+    const next=winners(44);
+
+    S.round=2;
+    S.pool=shuffle(next);
+    S.groups=chunk(S.pool,2);
+    S.index=0;
+    S.answers=[];
+
+    return;
+
+  }
+
+  if(S.round===2){
+
+    const next=winners(22);
+
+    S.round=3;
+    S.pool=shuffle(next);
+    S.groups=chunk(S.pool,2);
+    S.index=0;
+    S.answers=[];
+
+    return;
+
+  }
+
+  if(S.round===3){
+
+    const finalists=winners(11);
+
+    beginFinal(finalists);
+
+  }
+
 }
 
-function undo(){
+/* ==================================================
+   FINAL
+   11强自动完整排位
+   使用二分插入排序。
 
-if(!S.history.length)return;
+   第一名自动进入榜单。
+   之后每个候选人与当前榜单中间位置比较，
+   根据用户选择缩小插入范围。
+   全部完成后得到完整1-11名。
+================================================== */
 
-const h=S.history.pop();
+function beginFinal(ids){
 
-const old=JSON.parse(h);
+  const list=shuffle(ids);
 
-const hist=S.history;
+  S.phase="final";
 
-S=old;
+  S.finalList=[list[0]];
 
-S.history=hist;
+  S.finalRemaining=list.slice(1);
 
-save();
+  S.finalCandidate=null;
 
-render();
+  S.finalLow=0;
+  S.finalHigh=0;
+  S.finalMid=0;
+
+  S.finalComparisons=0;
+
+  prepareNextCandidate();
 
 }
 
-/* FINAL */
+function prepareNextCandidate(){
+
+  if(!S.finalRemaining.length){
+
+    finishFinal();
+    return;
+
+  }
+
+  S.finalCandidate=S.finalRemaining.shift();
+
+  S.finalLow=0;
+
+  S.finalHigh=S.finalList.length;
+
+  prepareFinalComparison();
+
+}
+
+function prepareFinalComparison(){
+
+  /*
+    low == high 时，插入位置已经确定
+  */
+
+  if(S.finalLow>=S.finalHigh){
+
+    S.finalList.splice(
+      S.finalLow,
+      0,
+      S.finalCandidate
+    );
+
+    S.finalCandidate=null;
+
+    prepareNextCandidate();
+
+    return;
+
+  }
+
+  S.finalMid=
+    Math.floor(
+      (S.finalLow+S.finalHigh)/2
+    );
+
+}
 
 function renderFinal(){
 
-document.body.classList.remove('round-one');
+  show("game");
 
-show('final');
+  document.body.classList.remove("round-one");
 
-$('finalCount').textContent=
-`已选择 ${S.finalPicks.length} / 3 · 最终决选`;
+  document.body.classList.add("duel");
 
-$('finalGrid').innerHTML=
-S.pool
-.map(id=>cardHTML(id,true))
-.join('');
+  $("roundLabel").textContent=
+    "FINAL · 最终排位";
 
-$('finalGrid')
-.querySelectorAll('.card')
-.forEach(b=>{
+  const ranked=S.finalList.length;
 
-const i=
-S.finalPicks.indexOf(
-b.dataset.id
-);
+  const remaining=
+    S.finalRemaining.length +
+    (S.finalCandidate ? 1 : 0);
 
-if(i>=0){
+  $("counter").textContent=
+    `已排入 ${ranked} / 11 · 待排 ${remaining}`;
 
-b.classList.add('selected');
+  /*
+    FINAL进度是近似视觉进度，
+    因为二分比较次数取决于选择。
+  */
 
-b.querySelector('.pickbadge')
-.textContent='TOP '+(i+1);
+  $("bar").style.width=
+    `${Math.min(100,(ranked/11)*100)}%`;
 
-}
+  $("question").textContent=
+    "最后排位，哪一对更让你心动？";
 
-b.onclick=
-()=>pickFinal(b.dataset.id);
+  /*
+    FINAL 不允许“都跳过”，
+    因为必须得到明确排名。
+  */
 
-});
+  $("skipBtn").classList.add("hidden");
 
-$('finalUndo').disabled=
-!S.finalPicks.length;
+  if(!S.finalCandidate){
 
-}
+    prepareNextCandidate();
 
-function pickFinal(id){
+    if(S.phase==="result"){
 
-if(
-S.finalPicks.includes(id) ||
-S.finalPicks.length>=3
-){
+      renderResult();
+      return;
 
-return;
+    }
 
-}
+  }
 
-S.finalPicks.push(id);
+  const opponent=
+    S.finalList[S.finalMid];
 
-save();
+  const pair=[
+    S.finalCandidate,
+    opponent
+  ];
 
-if(S.finalPicks.length===3){
+  $("choices").innerHTML=
+    pair
+      .map(cardHTML)
+      .join('<div class="vs">VS</div>');
 
-S.round=5;
+  $("choices")
+    .querySelectorAll(".card")
+    .forEach(btn=>{
 
-save();
+      btn.onclick=
+        ()=>answerFinal(btn.dataset.id);
 
-setTimeout(
-render,
-180
-);
+    });
 
-}else{
-
-renderFinal();
-
-}
-
-}
-
-function finalUndo(){
-
-if(!S.finalPicks.length)return;
-
-S.finalPicks.pop();
-
-save();
-
-renderFinal();
+  $("undoBtn").disabled=
+    !S.history.length;
 
 }
 
-/* 结果 */
+function answerFinal(id){
+
+  pushHistory();
+
+  const candidate=S.finalCandidate;
+
+  const opponent=
+    S.finalList[S.finalMid];
+
+  /*
+    排名数组：索引越小，排名越高。
+
+    如果候选获胜：
+    候选应该排在 opponent 前面，
+    所以搜索左半边。
+
+    如果榜内 opponent 获胜：
+    候选排在 opponent 后面，
+    搜索右半边。
+  */
+
+  if(id===candidate){
+
+    S.finalHigh=
+      S.finalMid;
+
+  }else if(id===opponent){
+
+    S.finalLow=
+      S.finalMid+1;
+
+  }
+
+  S.finalComparisons++;
+
+  S.completed++;
+
+  prepareFinalComparison();
+
+  save();
+
+  render();
+
+}
+
+function finishFinal(){
+
+  S.result=
+    S.finalList.slice(0,3);
+
+  S.phase="result";
+
+  save();
+
+}
+
+/* ==================================================
+   撤回
+================================================== */
+
+function undo(){
+
+  if(!S.history.length)return;
+
+  const previous=
+    S.history.pop();
+
+  const remainingHistory=
+    S.history;
+
+  S=JSON.parse(previous);
+
+  S.history=remainingHistory;
+
+  save();
+
+  render();
+
+}
+
+/* ==================================================
+   RESULT
+================================================== */
 
 function renderResult(){
 
-document.body.classList.remove('round-one');
+  document.body.classList.remove(
+    "round-one",
+    "duel"
+  );
 
-show('result');
+  show("result");
 
-const icons=[
-'👑 TOP 1',
-'🥈 TOP 2',
-'🥉 TOP 3'
-];
+  const medals=[
+    "👑 TOP 1",
+    "🥈 TOP 2",
+    "🥉 TOP 3"
+  ];
 
-$('podium').innerHTML=
-S.finalPicks.map((id,i)=>{
+  $("podium").innerHTML=
+    S.result
+      .map((id,index)=>{
 
-const c=byId(id);
+        const c=byId(id);
 
-return `
-<div class="rankcard glass ${i===0?'top1':''}">
+        return `
+          <div class="rankcard glass ${index===0?"top1":""}">
 
-<span class="medal">
-${icons[i]}
-</span>
+            <span class="medal">
+              ${medals[index]}
+            </span>
 
-<img
-src="${c.image}"
-alt="${c.name}">
+            <img src="${c.image}" alt="${c.name}">
 
-<div class="rankmeta">
+            <div class="rankmeta">
 
-<div class="cpname">
-${c.name}
-</div>
+              <div class="cpname">
+                ${c.name}
+              </div>
 
-<div class="people">
-${c.people}
-</div>
+              <div class="people">
+                ${c.people}
+              </div>
 
-</div>
+            </div>
 
-</div>
-`;
+          </div>
+        `;
 
-}).join('');
+      })
+      .join("");
 
 }
 
-/* 导出 */
+/* ==================================================
+   导出 TOP3
+================================================== */
 
 async function exportRanking(){
 
-const cvs=$('exportCanvas');
+  const cvs=$("exportCanvas");
 
-const ctx=cvs.getContext('2d');
+  const ctx=cvs.getContext("2d");
 
-const W=cvs.width;
+  const W=cvs.width;
+  const H=cvs.height;
 
-const H=cvs.height;
+  const gradient=
+    ctx.createLinearGradient(
+      0,0,W,H
+    );
 
-const g=
-ctx.createLinearGradient(
-0,0,W,H
-);
+  gradient.addColorStop(
+    0,
+    "#fff9ef"
+  );
 
-g.addColorStop(
-0,
-'#fff9ef'
-);
+  gradient.addColorStop(
+    .52,
+    "#f0e6ff"
+  );
 
-g.addColorStop(
-.55,
-'#f2e9ff'
-);
+  gradient.addColorStop(
+    1,
+    "#fff2e6"
+  );
 
-g.addColorStop(
-1,
-'#fff4e7'
-);
+  ctx.fillStyle=gradient;
 
-ctx.fillStyle=g;
+  ctx.fillRect(0,0,W,H);
 
-ctx.fillRect(
-0,0,W,H
-);
+  ctx.textAlign="center";
 
-ctx.fillStyle='#8c72a9';
+  ctx.fillStyle="#8d75a9";
 
-ctx.font=
-'700 28px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+  ctx.font=
+    '700 28px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
-ctx.textAlign='center';
+  ctx.fillText(
+    "CP HEART RANKING",
+    W/2,
+    72
+  );
 
-ctx.fillText(
-'CP HEART RANKING',
-W/2,
-74
-);
+  ctx.fillStyle="#342c40";
 
-ctx.fillStyle='#342c40';
+  ctx.font=
+    '900 60px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
-ctx.font=
-'900 58px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+  ctx.fillText(
+    "你的心动 TOP 3",
+    W/2,
+    145
+  );
 
-ctx.fillText(
-'你的心动 TOP 3',
-W/2,
-142
-);
+  ctx.fillStyle="#7d7389";
 
-ctx.font=
-'26px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+  ctx.font=
+    '25px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
-ctx.fillStyle='#7d7389';
+  ctx.fillText(
+    "132 组 CP · 多轮心动对决",
+    W/2,
+    192
+  );
 
-ctx.fillText(
-'132 组 CP · 77 道对决 + TOP 3 决选',
-W/2,
-190
-);
+  const boxes=[
 
-const boxes=[
+    {
+      x:90,
+      y:240,
+      w:900,
+      h:610,
+      imageH:470
+    },
 
-{
-x:90,
-y:245,
-w:900,
-h:470
-},
+    {
+      x:65,
+      y:900,
+      w:460,
+      h:530,
+      imageH:390
+    },
 
-{
-x:70,
-y:775,
-w:455,
-h:500
-},
+    {
+      x:555,
+      y:900,
+      w:460,
+      h:530,
+      imageH:390
+    }
 
-{
-x:555,
-y:775,
-w:455,
-h:500
-}
+  ];
 
-];
+  for(let i=0;i<3;i++){
 
-for(let i=0;i<3;i++){
+    const c=
+      byId(S.result[i]);
 
-const c=
-byId(S.finalPicks[i]);
+    const b=
+      boxes[i];
 
-const b=
-boxes[i];
+    const img=
+      await loadImg(c.image);
 
-const img=
-await loadImg(c.image);
+    drawRoundRect(
+      ctx,
+      b.x,
+      b.y,
+      b.w,
+      b.h,
+      30,
+      "rgba(255,255,255,.9)"
+    );
 
-roundRect(
-ctx,
-b.x,
-b.y,
-b.w,
-b.h,
-30,
-'#ffffffdd'
-);
+    drawCover(
+      ctx,
+      img,
+      b.x,
+      b.y,
+      b.w,
+      b.imageH,
+      30
+    );
 
-const ih=330;
+    ctx.textAlign="left";
 
-cover(
-ctx,
-img,
-b.x,
-b.y,
-b.w,
-ih,
-30
-);
+    ctx.fillStyle="#342c40";
 
-ctx.textAlign='left';
+    ctx.font=
+      i===0
+      ? '900 45px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
+      : '900 34px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
-ctx.fillStyle='#342c40';
+    ctx.fillText(
+      c.name,
+      b.x+26,
+      b.y+b.imageH+55
+    );
 
-ctx.font=
-i===0
-?'900 46px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
-:'900 38px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+    ctx.fillStyle="#7d7389";
 
-ctx.fillText(
-c.name,
-b.x+28,
-b.y+ih+62
-);
+    ctx.font=
+      i===0
+      ? '25px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
+      : '20px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
-ctx.font=
-i===0
-?'26px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif'
-:'22px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+    ctx.fillText(
+      c.people,
+      b.x+26,
+      b.y+b.imageH+96
+    );
 
-ctx.fillStyle='#7d7389';
+    ctx.textAlign="right";
 
-ctx.fillText(
-c.people,
-b.x+28,
-b.y+ih+104
-);
+    ctx.fillStyle="#a17ad5";
 
-ctx.textAlign='right';
+    ctx.font=
+      '900 25px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
-ctx.fillStyle='#a581d6';
+    ctx.fillText(
+      `TOP ${i+1}`,
+      b.x+b.w-25,
+      b.y+b.imageH+54
+    );
 
-ctx.font=
-'900 28px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+  }
 
-ctx.fillText(
-i===0
-?'TOP 1'
-:i===1
-?'TOP 2'
-:'TOP 3',
-b.x+b.w-28,
-b.y+ih+60
-);
+  ctx.textAlign="center";
 
-}
+  ctx.fillStyle="#9b8ca6";
 
-ctx.textAlign='center';
+  ctx.font=
+    '22px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
 
-ctx.font=
-'22px -apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif';
+  ctx.fillText(
+    "哪对 CP 更让你心动",
+    W/2,
+    1530
+  );
 
-ctx.fillStyle='#9a8ca6';
+  const url=
+    cvs.toDataURL("image/png");
 
-ctx.fillText(
-'哪对 CP 更让你心动',
-W/2,
-1430
-);
+  $("exportImg").src=url;
 
-const url=
-cvs.toDataURL('image/png');
+  $("modal").classList.remove("hidden");
 
-$('exportImg').src=url;
+  $("downloadBtn").onclick=()=>{
 
-$('modal')
-.classList
-.remove('hidden');
+    const a=
+      document.createElement("a");
 
-$('downloadBtn').onclick=()=>{
+    a.href=url;
 
-const a=
-document.createElement('a');
+    a.download="我的CP-TOP3.png";
 
-a.href=url;
+    a.click();
 
-a.download=
-'我的CP-TOP3.png';
-
-a.click();
-
-};
+  };
 
 }
 
 function loadImg(src){
 
-return new Promise(
-(resolve,reject)=>{
+  return new Promise(
+    (resolve,reject)=>{
 
-const i=new Image();
+      const img=new Image();
 
-i.onload=
-()=>resolve(i);
+      img.onload=
+        ()=>resolve(img);
 
-i.onerror=
-reject;
+      img.onerror=reject;
 
-i.src=src;
+      img.src=src;
+
+    }
+  );
 
 }
-);
 
-}
-
-function roundRect(
-c,x,y,w,h,r,fill
+function drawRoundRect(
+  ctx,x,y,w,h,r,fill
 ){
 
-c.beginPath();
+  ctx.beginPath();
 
-c.roundRect(
-x,y,w,h,r
-);
+  ctx.roundRect(
+    x,y,w,h,r
+  );
 
-c.fillStyle=fill;
+  ctx.fillStyle=fill;
 
-c.fill();
+  ctx.fill();
 
 }
 
-function cover(
-c,img,x,y,w,h,r
+function drawCover(
+  ctx,img,x,y,w,h,r
 ){
 
-const s=
-Math.max(
-w/img.width,
-h/img.height
-);
+  const scale=
+    Math.max(
+      w/img.width,
+      h/img.height
+    );
 
-const sw=w/s;
+  const sw=w/scale;
+  const sh=h/scale;
 
-const sh=h/s;
+  const sx=
+    (img.width-sw)/2;
 
-const sx=
-(img.width-sw)/2;
+  /*
+    稍微向上取景，
+    更适合3:4双人人像
+  */
 
-const sy=
-(img.height-sh)/2;
+  const sy=
+    Math.max(
+      0,
+      (img.height-sh)*.34
+    );
 
-c.save();
+  ctx.save();
 
-c.beginPath();
+  ctx.beginPath();
 
-c.roundRect(
-x,
-y,
-w,
-h,
-[r,r,0,0]
-);
+  ctx.roundRect(
+    x,
+    y,
+    w,
+    h,
+    [r,r,0,0]
+  );
 
-c.clip();
+  ctx.clip();
 
-c.drawImage(
-img,
-sx,
-sy,
-sw,
-sh,
-x,
-y,
-w,
-h
-);
+  ctx.drawImage(
+    img,
+    sx,
+    sy,
+    sw,
+    sh,
+    x,
+    y,
+    w,
+    h
+  );
 
-c.restore();
-
-}
-
-/* 按钮 */
-
-$('startBtn').onclick=()=>{
-
-if(
-load() &&
-!confirm(
-'开始新的测试会覆盖旧进度，确定吗？'
-)
-){
-
-return;
+  ctx.restore();
 
 }
 
-start(true);
+/* ==================================================
+   按钮
+================================================== */
+
+$("startBtn").onclick=()=>{
+
+  const old=load();
+
+  if(
+    old &&
+    old.phase!=="result"
+  ){
+
+    const ok=confirm(
+      "开始新的测试会覆盖之前保存的进度，确定重新开始吗？"
+    );
+
+    if(!ok)return;
+
+  }
+
+  start(true);
 
 };
 
-$('continueBtn').onclick=
-()=>start(false);
+$("continueBtn").onclick=
+  ()=>start(false);
 
-$('skipBtn').onclick=
-skip;
+$("undoBtn").onclick=
+  undo;
 
-$('undoBtn').onclick=
-undo;
+$("skipBtn").onclick=()=>{
 
-$('saveBtn').onclick=()=>{
+  if(S.phase==="round"){
 
-save();
+    skipRound();
 
-$('saveBtn').textContent=
-'✓ 已保存';
-
-setTimeout(
-()=>{
-
-$('saveBtn').textContent=
-'💾 保存进度';
-
-},
-900
-);
+  }
 
 };
 
-$('homeBtn').onclick=()=>{
+$("saveBtn").onclick=()=>{
 
-save();
+  save();
 
-document.body.classList.remove(
-'round-one'
-);
+  const old=
+    $("saveBtn").textContent;
 
-show('home');
+  $("saveBtn").textContent=
+    "✓ 已保存";
 
-};
+  setTimeout(()=>{
 
-$('finalUndo').onclick=
-finalUndo;
+    $("saveBtn").textContent=old;
 
-$('exportBtn').onclick=
-exportRanking;
-
-$('closeModal').onclick=()=>{
-
-$('modal')
-.classList
-.add('hidden');
+  },900);
 
 };
 
-$('modal').onclick=e=>{
+$("homeBtn").onclick=()=>{
 
-if(
-e.target===$('modal')
-){
+  save();
 
-$('modal')
-.classList
-.add('hidden');
+  document.body.classList.remove(
+    "round-one",
+    "duel"
+  );
 
-}
+  show("home");
+
+  startHero();
+
+};
+
+$("exportBtn").onclick=
+  exportRanking;
+
+$("closeModal").onclick=()=>{
+
+  $("modal").classList.add("hidden");
 
 };
 
-$('restartBtn').onclick=()=>{
+$("modal").onclick=e=>{
 
-if(
-confirm(
-'确定清空本次结果并重新测试吗？'
-)
-){
+  if(e.target===$("modal")){
 
-localStorage.removeItem(KEY);
+    $("modal").classList.add("hidden");
 
-S=fresh();
-
-save();
-
-render();
-
-}
+  }
 
 };
+
+$("restartBtn").onclick=()=>{
+
+  const ok=confirm(
+    "确定清空本次结果并重新测试吗？"
+  );
+
+  if(!ok)return;
+
+  localStorage.removeItem(KEY);
+
+  S=fresh();
+
+  save();
+
+  render();
+
+};
+
+/* 页面加载时检查存档 */
 
 if(load()){
 
-$('continueBtn')
-.classList
-.remove('hidden');
+  $("continueBtn")
+    .classList
+    .remove("hidden");
 
 }
 
