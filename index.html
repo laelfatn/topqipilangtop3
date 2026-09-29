@@ -29,6 +29,72 @@ body.round-one,body.duel{overflow:auto}.round-one .app,.duel .app{padding:max(8p
 .round-one .toolbar,.duel .toolbar{position:fixed;z-index:30;left:16px;right:16px;bottom:calc(8px + env(safe-area-inset-bottom));display:grid;grid-template-columns:.85fr 1.3fr 1fr;gap:6px;margin:0;padding:6px;border-radius:21px;background:rgba(248,244,252,.90);border:1px solid rgba(255,255,255,.85);box-shadow:0 10px 30px rgba(61,46,78,.15);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}.round-one .toolbar .btn,.duel .toolbar .btn{padding:9px 3px;min-height:42px;border-radius:15px;font-size:10.5px;box-shadow:none;white-space:nowrap}
 .podium{gap:9px}.rankcard:not(.top1) .cpname{font-size:16px}.rankcard:not(.top1) .people{font-size:11px}
 }
+
+/* ===== ROUND 1 · 4选1 手机四宫格 ===== */
+@media(max-width:520px){
+  body.round-one .app{
+    padding:max(8px,env(safe-area-inset-top)) 14px calc(88px + env(safe-area-inset-bottom));
+  }
+  body.round-one #game{
+    min-height:100dvh;
+    padding-bottom:calc(76px + env(safe-area-inset-bottom));
+  }
+  body.round-one .question{
+    margin:5px 0 8px;
+    font-size:17px;
+  }
+  body.round-one .choices{
+    width:100%;
+    max-width:430px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+    align-items:start;
+  }
+  body.round-one .card{
+    min-width:0;
+    width:100%;
+    border-radius:17px;
+  }
+  body.round-one .photo{
+    width:100%;
+    aspect-ratio:4/3;
+    height:auto;
+    object-fit:cover;
+    object-position:center;
+  }
+  body.round-one .meta{
+    min-height:52px;
+    padding:7px 9px 8px;
+  }
+  body.round-one .cpname{
+    padding-right:0;
+    font-size:14px;
+    line-height:1.15;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  body.round-one .people{
+    margin-top:3px;
+    font-size:9.5px;
+    line-height:1.2;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  body.round-one .num{
+    display:none;
+  }
+  body.round-one .select-badge{
+    top:6px;
+    right:6px;
+    padding:4px 7px;
+    font-size:9.5px;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -37,7 +103,7 @@ body.round-one,body.duel{overflow:auto}.round-one .app,.duel .app{padding:max(8p
 <div class="hero"><div class="eyebrow">CP HEART RANKING · 132</div><h1>哪对 CP 更让你心动</h1><p>132 组 CP · 多轮心动对决 · 自动生成 TOP 3</p></div>
 <div class="stack" id="stack"></div>
 <div class="home-actions"><button class="btn primary" id="startBtn">开始心动测试 ♡</button><button class="btn ghost hidden" id="continueBtn">继续上次进度</button></div>
-<div class="rule glass">ROUND 01　三选一：132 → 44<br>ROUND 02　两两复选：44 → 22<br>ROUND 03　高位复核：22 → 11<br>FINAL　11 组进行最终排位对决，系统自动计算 TOP 3。<br><br>每一道都可以撤回。前三轮可以跳过。测试进度会自动保存在当前浏览器。<br>FINAL 完成以后会直接显示最终 TOP 3，不需要再手动选择前三名。</div>
+<div class="rule glass">ROUND 01　四选一：132 → 33<br>ROUND 02　两两复选：33 → 17<br>ROUND 03　高位复核：17 → 9<br>FINAL　9 组进行最终排位对决，系统自动计算 TOP 3。<br><br>每一道都可以撤回。前三轮可以跳过。测试进度会自动保存在当前浏览器。<br>FINAL 完成以后会直接显示最终 TOP 3，不需要再手动选择前三名。</div>
 </section>
 <section id="game" class="hidden">
 <div class="topbar"><div><div class="round" id="roundLabel"></div><div class="counter" id="counter"></div></div><button class="btn ghost" id="homeBtn">首页</button></div>
@@ -183,7 +249,7 @@ const CPS=[
 {"id":"131","people":"张峻豪 × 黄朔","name":"顺朔","image":"images/131.jpeg"},
 {"id":"132","people":"张峻豪 × 余宇涵","name":"豪涵无际","image":"images/132.jpeg"}
 ];
-const KEY="cp-heart-ranking-mobile-final-v5";
+const KEY="cp-heart-ranking-4pick-final-v6";
 const $=id=>document.getElementById(id),byId=id=>CPS.find(c=>c.id===id);let S=null;
 function shuffle(arr){const a=[...arr];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function chunk(arr,n){const out=[];for(let i=0;i<arr.length;i+=n)out.push(arr.slice(i,i+n));return out}
@@ -194,20 +260,30 @@ const HERO_IDS=["039","068","125","024","070","085","110","132"];let heroOrder=[
 function buildHero(){const stack=$("stack");stack.innerHTML="";heroOrder.slice(0,4).forEach((id,i)=>{const c=byId(id),el=document.createElement("div");el.className=`stack-card pos${i}`;el.innerHTML=`<img src="${c.image}" alt="">`;stack.appendChild(el)})}
 function rotateHero(){if(heroBusy||$("home").classList.contains("hidden"))return;const first=$("stack").querySelector(".pos0");if(!first)return;heroBusy=true;first.classList.add("fly");setTimeout(()=>{heroOrder.push(heroOrder.shift());buildHero();heroBusy=false},650)}
 function startHero(){clearInterval(heroTimer);heroTimer=setInterval(rotateHero,2800)}buildHero();startHero();
-function fresh(){const order=shuffle(CPS.map(c=>c.id));return{phase:"round",round:1,index:0,pool:order,groups:chunk(order,3),answers:[],history:[],completed:0,finalList:[],finalRemaining:[],finalCandidate:null,finalLow:0,finalHigh:0,finalMid:0,finalComparisons:0,result:[]}}
+function fresh(){const order=shuffle(CPS.map(c=>c.id));return{phase:"round",round:1,index:0,pool:order,groups:chunk(order,4),answers:[],history:[],completed:0,finalList:[],finalRemaining:[],finalCandidate:null,finalLow:0,finalHigh:0,finalMid:0,finalComparisons:0,result:[]}}
 function start(newGame=true){S=newGame?fresh():load();if(!S)S=fresh();save();render()}
 function cardHTML(id){const c=byId(id);if(!c)return"";return `<button class="card glass" data-id="${id}"><img class="photo" src="${c.image}" alt="${c.name}"><span class="select-badge">选择</span><div class="meta"><span class="num">#${id}</span><div class="cpname">${c.name}</div><div class="people">${c.people}</div></div></button>`}
 function render(){if(S.phase==="result")return renderResult();if(S.phase==="final")return renderFinal();renderRound()}
-function renderRound(){show("game");document.body.classList.toggle("round-one",S.round===1);document.body.classList.toggle("duel",S.round!==1);const names={1:"ROUND 01 · 全员海选",2:"ROUND 02 · 心动复选",3:"ROUND 03 · 高位复核"};$("roundLabel").textContent=names[S.round];const group=S.groups[S.index];$("counter").textContent=`本轮 ${S.index+1} / ${S.groups.length} · 已完成 ${S.completed} 场`;$("bar").style.width=`${(S.index/(S.groups.length||1))*100}%`;$("question").textContent=S.round===1?"这一组，选谁？":"哪一对更让你心动？";$("skipBtn").classList.remove("hidden");if(!group){finishRound();save();render();return}$("choices").innerHTML=group.map(cardHTML).join(S.round===1?"":'<div class="vs">VS</div>');$("choices").querySelectorAll(".card").forEach(btn=>btn.onclick=()=>answerRound(btn.dataset.id));$("undoBtn").disabled=!S.history.length}
+function renderRound(){show("game");document.body.classList.toggle("round-one",S.round===1);document.body.classList.toggle("duel",S.round!==1);const names={1:"ROUND 01 · 四选一海选",2:"ROUND 02 · 心动复选",3:"ROUND 03 · 高位复核"};$("roundLabel").textContent=names[S.round];const group=S.groups[S.index];
+if(group && S.round>1 && group.length===1){
+  pushHistory();
+  S.answers.push({group,pick:group[0]});
+  S.index++;
+  if(S.index>=S.groups.length)finishRound();
+  save();
+  render();
+  return;
+}
+$("counter").textContent=`本轮 ${S.index+1} / ${S.groups.length} · 已完成 ${S.completed} 场`;$("bar").style.width=`${(S.index/(S.groups.length||1))*100}%`;$("question").textContent=S.round===1?"这一组，四选一":"哪一对更让你心动？";$("skipBtn").classList.remove("hidden");if(!group){finishRound();save();render();return}$("choices").innerHTML=group.map(cardHTML).join(S.round===1?"":'<div class="vs">VS</div>');$("choices").querySelectorAll(".card").forEach(btn=>btn.onclick=()=>answerRound(btn.dataset.id));$("undoBtn").disabled=!S.history.length}
 function pushHistory(){const copy={...S,history:[]};S.history.push(JSON.stringify(copy))}
 function answerRound(id){pushHistory();S.answers.push({group:S.groups[S.index],pick:id});S.index++;S.completed++;if(S.index>=S.groups.length)finishRound();save();render()}
 function skipRound(){pushHistory();S.answers.push({group:S.groups[S.index],pick:null});S.index++;S.completed++;if(S.index>=S.groups.length)finishRound();save();render()}
 function winners(target){const scores={};S.pool.forEach((id,index)=>scores[id]={id,win:0,seed:index});S.answers.forEach(a=>{if(a.pick&&scores[a.pick])scores[a.pick].win++});return Object.values(scores).sort((a,b)=>b.win-a.win||a.seed-b.seed).slice(0,target).map(x=>x.id)}
-function finishRound(){if(S.round===1){const next=winners(44);S.round=2;S.pool=shuffle(next);S.groups=chunk(S.pool,2);S.index=0;S.answers=[];return}if(S.round===2){const next=winners(22);S.round=3;S.pool=shuffle(next);S.groups=chunk(S.pool,2);S.index=0;S.answers=[];return}if(S.round===3)beginFinal(winners(11))}
+function finishRound(){if(S.round===1){const next=winners(33);S.round=2;S.pool=shuffle(next);S.groups=chunk(S.pool,2);S.index=0;S.answers=[];return}if(S.round===2){const next=winners(17);S.round=3;S.pool=shuffle(next);S.groups=chunk(S.pool,2);S.index=0;S.answers=[];return}if(S.round===3)beginFinal(winners(9))}
 function beginFinal(ids){const list=shuffle(ids);S.phase="final";S.finalList=[list[0]];S.finalRemaining=list.slice(1);S.finalCandidate=null;S.finalLow=0;S.finalHigh=0;S.finalMid=0;S.finalComparisons=0;prepareNextCandidate()}
 function prepareNextCandidate(){if(!S.finalRemaining.length){finishFinal();return}S.finalCandidate=S.finalRemaining.shift();S.finalLow=0;S.finalHigh=S.finalList.length;prepareFinalComparison()}
 function prepareFinalComparison(){if(S.finalLow>=S.finalHigh){S.finalList.splice(S.finalLow,0,S.finalCandidate);S.finalCandidate=null;prepareNextCandidate();return}S.finalMid=Math.floor((S.finalLow+S.finalHigh)/2)}
-function renderFinal(){show("game");document.body.classList.remove("round-one");document.body.classList.add("duel");$("roundLabel").textContent="FINAL · 最终排位";const ranked=S.finalList.length,remaining=S.finalRemaining.length+(S.finalCandidate?1:0);$("counter").textContent=`已排入 ${ranked} / 11 · 待排 ${remaining}`;$("bar").style.width=`${Math.min(100,ranked/11*100)}%`;$("question").textContent="最后排位，哪一对更让你心动？";$("skipBtn").classList.add("hidden");if(!S.finalCandidate){prepareNextCandidate();if(S.phase==="result"){renderResult();return}}const opponent=S.finalList[S.finalMid],pair=[S.finalCandidate,opponent];$("choices").innerHTML=pair.map(cardHTML).join('<div class="vs">VS</div>');$("choices").querySelectorAll(".card").forEach(btn=>btn.onclick=()=>answerFinal(btn.dataset.id));$("undoBtn").disabled=!S.history.length}
+function renderFinal(){show("game");document.body.classList.remove("round-one");document.body.classList.add("duel");$("roundLabel").textContent="FINAL · 最终排位";const ranked=S.finalList.length,remaining=S.finalRemaining.length+(S.finalCandidate?1:0);$("counter").textContent=`已排入 ${ranked} / 9 · 待排 ${remaining}`;$("bar").style.width=`${Math.min(100,ranked/9*100)}%`;$("question").textContent="最后排位，哪一对更让你心动？";$("skipBtn").classList.add("hidden");if(!S.finalCandidate){prepareNextCandidate();if(S.phase==="result"){renderResult();return}}const opponent=S.finalList[S.finalMid],pair=[S.finalCandidate,opponent];$("choices").innerHTML=pair.map(cardHTML).join('<div class="vs">VS</div>');$("choices").querySelectorAll(".card").forEach(btn=>btn.onclick=()=>answerFinal(btn.dataset.id));$("undoBtn").disabled=!S.history.length}
 function answerFinal(id){pushHistory();const candidate=S.finalCandidate,opponent=S.finalList[S.finalMid];if(id===candidate)S.finalHigh=S.finalMid;else if(id===opponent)S.finalLow=S.finalMid+1;S.finalComparisons++;S.completed++;prepareFinalComparison();save();render()}
 function finishFinal(){S.result=S.finalList.slice(0,3);S.phase="result";save()}
 function undo(){if(!S.history.length)return;const previous=S.history.pop(),remainingHistory=S.history;S=JSON.parse(previous);S.history=remainingHistory;save();render()}
