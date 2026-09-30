@@ -14,7 +14,7 @@ button{font:inherit;border:0;cursor:pointer;-webkit-tap-highlight-color:transpar
 .glass{background:var(--glass);border:1px solid rgba(255,255,255,.9);box-shadow:var(--shadow);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
 .btn{padding:14px 18px;border-radius:18px;background:#fff;color:var(--ink);box-shadow:0 7px 22px rgba(71,52,92,.09);font-weight:800}.btn.primary{color:#fff;background:linear-gradient(135deg,#a783df,#c5a7eb)}.btn.ghost{background:rgba(255,255,255,.72);border:1px solid var(--line)}
 .hero{text-align:center;padding:30px 10px 10px}.eyebrow{font-size:12px;letter-spacing:.23em;color:#8d77aa;font-weight:900}.hero h1{margin:12px 0 10px;font-size:34px;line-height:1.18}.hero p{margin:0;color:var(--muted);font-size:15px;line-height:1.6}
-.stack{position:relative;width:min(500px,90%);aspect-ratio:4/3;margin:22px auto 18px;perspective:1000px}.stack-card{position:absolute;width:78%;left:11%;top:4%;aspect-ratio:4/3;border-radius:27px;overflow:hidden;border:7px solid rgba(255,255,255,.96);background:#eee;box-shadow:0 18px 42px rgba(60,42,82,.18);transform-origin:center 85%;transition:transform .68s cubic-bezier(.22,.75,.24,1),opacity .55s ease}.stack-card img{width:100%;height:100%;object-fit:cover;display:block}.stack-card.pos0{z-index:4;transform:translate(0,0) rotate(-1deg)}.stack-card.pos1{z-index:3;transform:translate(-48px,24px) rotate(-7deg) scale(.92)}.stack-card.pos2{z-index:2;transform:translate(48px,25px) rotate(7deg) scale(.91)}.stack-card.pos3{z-index:1;transform:translate(0,32px) rotate(2deg) scale(.87);opacity:.28}.stack-card.fly{z-index:8!important;transform:translate(150px,-42px) rotate(17deg) scale(.96)!important;opacity:0}
+.stack{position:relative;width:min(500px,90%);aspect-ratio:4/3;margin:22px auto 18px;perspective:1000px}.stack-card{position:absolute;width:78%;left:11%;top:4%;aspect-ratio:4/3;border-radius:27px;overflow:hidden;border:7px solid rgba(255,255,255,.96);background:#eee;box-shadow:0 18px 42px rgba(60,42,82,.18);transform-origin:center 85%;transition:transform .48s cubic-bezier(.22,.8,.28,1),opacity .42s ease}.stack-card img{width:100%;height:100%;object-fit:cover;display:block}.stack-card.pos0{z-index:4;transform:translate(0,0) rotate(-1deg)}.stack-card.pos1{z-index:3;transform:translate(-48px,24px) rotate(-7deg) scale(.92)}.stack-card.pos2{z-index:2;transform:translate(48px,25px) rotate(7deg) scale(.91)}.stack-card.pos3{z-index:1;transform:translate(0,32px) rotate(2deg) scale(.87);opacity:.28}.stack-card.fly{z-index:8!important;transform:translate(150px,-42px) rotate(17deg) scale(.96)!important;opacity:0}
 .home-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:8px}.rule{margin-top:25px;padding:20px;border-radius:25px;color:var(--muted);font-size:14px;line-height:1.85}
 #game{padding-bottom:100px}.topbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}.round{font-size:17px;font-weight:950;letter-spacing:.04em}.counter{color:var(--muted);font-size:13px;margin-top:3px}.progress{height:7px;overflow:hidden;border-radius:999px;background:rgba(185,154,232,.20);margin-bottom:13px}.progress i{display:block;width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#ad88e1,#d2baef);transition:width .3s}.question{text-align:center;font-size:21px;font-weight:950;margin:11px 0 14px}.choices{display:grid;gap:12px}
 .card{width:100%;position:relative;padding:0;overflow:hidden;border-radius:23px;text-align:left;color:var(--ink);transition:transform .14s}.card:active{transform:scale(.985)}.photo{width:100%;aspect-ratio:4/3;display:block;object-fit:cover;object-position:center;background:#eee}.meta{padding:10px 14px 12px}.cpname{font-size:19px;line-height:1.18;font-weight:950}.people{margin-top:3px;font-size:13px;color:var(--muted)}.num{float:right;font-size:11px;color:#a89dae;font-weight:800}.select-badge{position:absolute;z-index:4;top:10px;right:10px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.94);color:#8d65cf;font-size:12px;font-weight:950;box-shadow:0 5px 15px rgba(50,35,70,.13);pointer-events:none}.vs{text-align:center;font-weight:950;color:#a67bd8;letter-spacing:.18em;margin:-2px 0}.toolbar{display:grid;grid-template-columns:.85fr 1.3fr 1fr;gap:8px;margin-top:14px}.toolbar .btn{padding:11px 6px;font-size:12px}
@@ -374,6 +374,19 @@ body.round-one,body.duel{overflow:auto}.round-one .app,.duel .app{padding:max(8p
   }
 }
 
+
+/* 首页叠放动画丝滑优化 */
+.stack-card{
+  will-change:transform,opacity;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  transform-style:preserve-3d;
+}
+.stack-card img{
+  transform:translateZ(0);
+  -webkit-transform:translateZ(0);
+}
+
 </style>
 </head>
 <body>
@@ -535,10 +548,10 @@ function chunk(arr,n){const out=[];for(let i=0;i<arr.length;i+=n)out.push(arr.sl
 function save(){if(!S)return;localStorage.setItem(KEY,JSON.stringify(S));$("continueBtn").classList.remove("hidden")}
 function load(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
 function show(id){["home","game","result"].forEach(x=>$(x).classList.toggle("hidden",x!==id));if(id!=="game")document.body.classList.remove("round-one","duel");window.scrollTo({top:0,behavior:"smooth"})}
-const HERO_IDS=["039","068","125","024","070","085","110","132"];let heroOrder=[...HERO_IDS],heroTimer=null,heroBusy=false;
+const HERO_IDS=["039","007","072","123","078","097","111","087"];let heroOrder=[...HERO_IDS],heroTimer=null,heroBusy=false;
 function buildHero(){const stack=$("stack");stack.innerHTML="";heroOrder.slice(0,4).forEach((id,i)=>{const c=byId(id),el=document.createElement("div");el.className=`stack-card pos${i}`;el.innerHTML=`<img src="${c.image}" alt="">`;stack.appendChild(el)})}
-function rotateHero(){if(heroBusy||$("home").classList.contains("hidden"))return;const first=$("stack").querySelector(".pos0");if(!first)return;heroBusy=true;first.classList.add("fly");setTimeout(()=>{heroOrder.push(heroOrder.shift());buildHero();heroBusy=false},650)}
-function startHero(){clearInterval(heroTimer);heroTimer=setInterval(rotateHero,2800)}buildHero();startHero();
+function rotateHero(){if(heroBusy||$("home").classList.contains("hidden"))return;const first=$("stack").querySelector(".pos0");if(!first)return;heroBusy=true;first.classList.add("fly");setTimeout(()=>{heroOrder.push(heroOrder.shift());buildHero();heroBusy=false},500)}
+function startHero(){clearInterval(heroTimer);heroTimer=setInterval(rotateHero,1500)}buildHero();startHero();
 function fresh(){const order=shuffle(CPS.map(c=>c.id));return{phase:"round",round:1,index:0,pool:order,groups:chunk(order,4),answers:[],history:[],completed:0,finalList:[],finalRemaining:[],finalCandidate:null,finalLow:0,finalHigh:0,finalMid:0,finalComparisons:0,result:[]}}
 function start(newGame=true){S=newGame?fresh():load();if(!S)S=fresh();save();render()}
 function cardHTML(id){const c=byId(id);if(!c)return"";return `<button class="card glass" data-id="${id}"><img class="photo" src="${c.image}" alt="${c.name}"><span class="select-badge">选择</span><div class="meta"><span class="num">#${id}</span><div class="cpname">${c.name}</div><div class="people">${c.people}</div></div></button>`}
